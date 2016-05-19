@@ -1,0 +1,13 @@
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\DependencyResolver.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\DependencyResolver.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\Ninject.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\Ninject.xml
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\obj\Debug\DependencyResolver.csprojResolveAssemblyReference.cache
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\obj\Debug\DependencyResolver.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\obj\Debug\DependencyResolver.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\Common.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\Common.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\Data.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\Data.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\Core.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\DependencyResolver\bin\Debug\Core.pdb

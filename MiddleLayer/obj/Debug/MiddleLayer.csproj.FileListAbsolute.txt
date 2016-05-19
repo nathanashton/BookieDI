@@ -1,0 +1,9 @@
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\bin\Debug\MiddleLayer.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\bin\Debug\MiddleLayer.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\obj\Debug\MiddleLayer.csprojResolveAssemblyReference.cache
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\obj\Debug\MiddleLayer.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\obj\Debug\MiddleLayer.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\bin\Debug\Common.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\bin\Debug\Common.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\bin\Debug\Data.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\MiddleLayer\bin\Debug\Data.pdb

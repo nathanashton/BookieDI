@@ -1,0 +1,7 @@
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\BottomLayer\bin\Debug\BottomLayer.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\BottomLayer\bin\Debug\BottomLayer.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\BottomLayer\obj\Debug\BottomLayer.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\BottomLayer\obj\Debug\BottomLayer.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\BottomLayer\bin\Debug\Common.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\BottomLayer\bin\Debug\Common.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\BottomLayer\obj\Debug\BottomLayer.csprojResolveAssemblyReference.cache

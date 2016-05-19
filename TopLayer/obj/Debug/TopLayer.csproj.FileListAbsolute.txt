@@ -1,0 +1,16 @@
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\TopLayer.exe.config
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\TopLayer.exe
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\TopLayer.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\DependencyResolver.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\MiddleLayer.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\Ninject.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\DependencyResolver.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\MiddleLayer.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\Ninject.xml
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\obj\Debug\TopLayer.csprojResolveAssemblyReference.cache
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\obj\Debug\TopLayer.exe
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\obj\Debug\TopLayer.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\Common.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\Common.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\Data.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\TopLayer\bin\Debug\Data.pdb

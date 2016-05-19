@@ -1,0 +1,4 @@
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\Common\bin\Debug\Common.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\Common\bin\Debug\Common.pdb
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\Common\obj\Debug\Common.dll
+c:\users\nathana\documents\visual studio 2015\Projects\Ninject\Common\obj\Debug\Common.pdb
