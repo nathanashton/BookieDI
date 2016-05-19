@@ -1,0 +1,13 @@
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.DependencyResolver.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.DependencyResolver.pdb
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.Core.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.Repository.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.Common.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.Repository.pdb
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.Core.pdb
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.Common.pdb
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\obj\Debug\Bookie.DependencyResolver.csprojResolveAssemblyReference.cache
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\obj\Debug\Bookie.DependencyResolver.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\obj\Debug\Bookie.DependencyResolver.pdb
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Ninject.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Ninject.xml
