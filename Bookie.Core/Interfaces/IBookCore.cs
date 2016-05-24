@@ -1,10 +1,13 @@
-﻿using Bookie.Common;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
+using Bookie.Common.Interfaces;
 
 namespace Bookie.Core.Interfaces
 {
     public interface IBookCore
     {
-        List<Book> GetAllBooks();
+        ObservableCollection<IBook> GetAllBooks();
+        void AddBook(BookCore book);
+        bool Exists(BookCore book);
+        BookCore GetBookById(int id);
     }
 }

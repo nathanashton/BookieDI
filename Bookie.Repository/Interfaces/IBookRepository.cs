@@ -1,5 +1,5 @@
-﻿using Bookie.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Bookie.Common.Entities;
 
 namespace Bookie.Repository.Interfaces
 {
