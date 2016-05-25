@@ -3,7 +3,6 @@ using Bookie.Common.Interfaces;
 using Bookie.Core;
 using Bookie.Core.Interfaces;
 using Bookie.Logging;
-using Bookie.Repository;
 using Bookie.Repository.Interfaces;
 using Bookie.Repository.Repositories;
 using Microsoft.Practices.Unity;
@@ -18,7 +17,7 @@ namespace Bookie.DependencyResolver
         {
             Container = new UnityContainer();
 
-            Container.RegisterType<ISQLiteRepository, SQLiteRepository>();
+            Container.RegisterType(typeof(IGenericDataRepository<>), typeof(GenericDataRepository<>));
             Container.RegisterType<IBookRepository, BookRepository>();
             Container.RegisterType<IBookCore, BookCore>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ISettings, Settings>(new ContainerControlledLifetimeManager());

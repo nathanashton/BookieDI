@@ -1,35 +1,64 @@
-﻿using System.Collections.Generic;
-using System.Data.SQLite;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Bookie.Common;
 using Bookie.Common.Entities;
+using Bookie.Common.Interfaces;
 using Bookie.Repository.Interfaces;
 
 namespace Bookie.Repository.Repositories
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository : GenericDataRepository<Book>, IBookRepository
     {
-        private readonly ISQLiteRepository _repository;
 
-        public BookRepository(ISQLiteRepository repository)
+        public bool Exists(string filePath)
         {
-            _repository = repository;
+            Log.Debug(MethodName.Get());
+            using (var context = new SqlCeContext())
+            {
+                return false;
+            }
+        }
+
+        public virtual async Task<IList<Book>> GetAllAsync(params Expression<Func<Book, object>>[] navigationProperties)
+        {
+            Log.Debug(MethodName.Get());
+            List<Book> list;
+            using (var context = new SqlCeContext())
+            {
+                IQueryable<Book> dbQuery = context.Set<Book>();
+                foreach (var navigationProperty in navigationProperties)
+                {
+                    dbQuery = dbQuery.Include(navigationProperty);
+                }
+                list = await dbQuery.AsNoTracking().ToListAsync();
+            }
+
+            return list;
+        }
+
+        public List<Book> GetAllNested()
+        {
+            Log.Debug(MethodName.Get());
+            using (var ctx = new SqlCeContext())
+            {
+                return
+                    ctx.Books
+                        .Include(b => b.BookFiles)
+                        .Include(c => c.CoverImage)
+                        .Include(r => r.Authors)
+                        .Include(r => r.Publishers)
+                        .AsNoTracking()
+                        .ToList();
+            }
         }
 
 
-        public List<Book> GetAllBooks()
+        public BookRepository(ISettings settings, ILog log) : base(settings, log)
         {
-            using (var conn = _repository.Connection())
-            {
-                var sql = "SELECT * FROM Books";
-                var command = new SQLiteCommand(sql, conn);
-                conn.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    var s = reader;
-                    var title = (string) reader["Title"];
-                }
-            }
-            return new List<Book>();
         }
     }
 }

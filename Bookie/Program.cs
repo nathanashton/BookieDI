@@ -19,6 +19,7 @@ namespace Bookie
             container.RegisterType<MainWindowViewModel>();
             var log = container.Resolve<ILog>();
             var settings = container.Resolve<ISettings>();
+            log.Info("Application Started");
             RunApplication(container, log, settings);
         }
 
@@ -32,7 +33,6 @@ namespace Bookie
                 }
                 var application = new App();
                 var mainWindow = container.Resolve<MainWindow>();
-                log.Info("Application Started");
                 application.Run(mainWindow);
             }
             catch (Exception ex)

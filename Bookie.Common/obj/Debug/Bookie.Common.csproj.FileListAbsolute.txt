@@ -2,3 +2,4 @@ C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Common\b
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Common\bin\Debug\Bookie.Common.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Common\obj\Debug\Bookie.Common.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Common\obj\Debug\Bookie.Common.pdb
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Common\obj\Debug\Bookie.Common.csprojResolveAssemblyReference.cache

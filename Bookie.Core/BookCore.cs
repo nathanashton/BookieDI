@@ -26,7 +26,7 @@ namespace Bookie.Core
         {
             try
             {
-                return _books ?? (_books = new ObservableCollection<IBook>(_bookRepository.GetAllBooks()));
+                return _books ?? (_books = new ObservableCollection<IBook>(_bookRepository.GetAll(x=> x.Publishers, x=> x.Authors)));
             }
             catch (BookieRepositoryException ex)
             {

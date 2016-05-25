@@ -10,5 +10,7 @@ namespace Bookie.Common.Interfaces
         void Info(string message, Exception exception);
         void Error(string message);
         void Error(string message, Exception exception);
+        void SetDebugLevel();
+        void SetInfoLevel();
     }
 }

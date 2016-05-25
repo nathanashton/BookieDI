@@ -3,10 +3,11 @@ C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Core.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Common.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Repository.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\EntityFramework.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Common.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Repository.pdb
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\EntityFramework.xml
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\obj\Debug\Bookie.Core.csprojResolveAssemblyReference.cache
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\obj\Debug\Bookie.Core.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\obj\Debug\Bookie.Core.pdb
-C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\System.Data.SQLite.dll
-C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\System.Data.SQLite.xml
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\System.Data.SqlServerCe.dll

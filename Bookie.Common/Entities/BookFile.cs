@@ -38,5 +38,10 @@ namespace Bookie.Common.Entities
                 return Path.GetExtension(FileName);
             }
         }
+
+        public virtual Book Book { get; set; }
+
+        [NotMapped]
+        public EntityState EntityState { get; set; }
     }
 }

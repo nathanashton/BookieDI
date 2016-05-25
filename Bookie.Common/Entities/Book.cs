@@ -18,13 +18,14 @@ namespace Bookie.Common.Entities
         public string Isbn13 { get; set; }
         public bool Favourite { get; set; }
         public int Rating { get; set; }
-
-        [NotMapped]
         public DateTime? ModifiedDateTime { get; set; }
 
         public virtual CoverImage CoverImage { get; set; }
-        public virtual ICollection<BookFile> BookFiles { get; set; }
-        public virtual ICollection<Author> Authors { get; set; }
-        public virtual ICollection<Publisher> Publishers { get; set; }
+        public virtual ICollection<BookFile> BookFiles { get; set; } = new HashSet<BookFile>();
+        public virtual ICollection<Author> Authors { get; set; } = new HashSet<Author>();
+        public virtual ICollection<Publisher> Publishers { get; set; } = new HashSet<Publisher>();
+
+        [NotMapped]
+        public EntityState EntityState { get; set; }
     }
 }
