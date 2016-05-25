@@ -27,3 +27,4 @@ C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Dependen
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\obj\Debug\Bookie.DependencyResolver.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\obj\Debug\Bookie.DependencyResolver.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.DependencyResolver\bin\Debug\Bookie.Core.xml

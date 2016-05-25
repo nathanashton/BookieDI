@@ -73,4 +73,5 @@ C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\obj\Debu
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\obj\Debug\Bookie.csproj.GenerateResource.Cache
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\obj\Debug\Bookie.exe
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\obj\Debug\Bookie.pdb
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.Core.xml
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Log4Net.config

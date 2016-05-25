@@ -11,3 +11,4 @@ C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\obj
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\obj\Debug\Bookie.Core.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\obj\Debug\Bookie.Core.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Core.XML

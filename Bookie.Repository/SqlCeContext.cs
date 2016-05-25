@@ -11,7 +11,7 @@ namespace Bookie.Repository
             // Database.SetInitializer(new CreateDatabaseIfNotExists<SqlCeContext>());
 
             // Seed Data
-            Database.SetInitializer(new BookieDbInitialiser());
+        //    Database.SetInitializer(new BookieDbInitialiser());
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
         }
@@ -31,16 +31,21 @@ namespace Bookie.Repository
                 .HasKey(e => e.Id);
 
             modelBuilder.Entity<Book>()
-                .HasOptional(e => e.CoverImage).WithRequired(e=> e.Book);
+                .HasOptional(e => e.CoverImage).WithRequired(e=> e.Book).WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Book>()
-                .HasMany(e => e.Authors).WithMany(e => e.Books);
+                .HasMany(e => e.Authors).WithMany(e => e.Books).Map(c =>
+                {
+                    c.MapLeftKey("Bookid");
+                    c.MapRightKey("AuthorId");
+                    c.ToTable("BookAuthors");
+                });
 
             modelBuilder.Entity<Book>()
                 .HasMany(e => e.Publishers).WithMany(e => e.Books);
 
             modelBuilder.Entity<Book>()
-                .HasMany(e => e.BookFiles).WithRequired(e => e.Book);
+                .HasMany(e => e.BookFiles).WithOptional(e => e.Book);
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Bookie.Common.Entities;
-using Bookie.Common.Interfaces;
 
 namespace Bookie.Repository.Interfaces
 {

@@ -11,25 +11,25 @@ using Bookie.Repository.Interfaces;
 
 namespace Bookie.Repository.Repositories
 {
-    public class BookRepository : GenericDataRepository<Book>, IBookRepository
+    public class AuthorRepository : GenericDataRepository<Author>, IAuthorRepository
     {
 
-        public bool Exists(string filePath)
+        public bool Exists(string firstname, string lastname)
         {
             Log.Debug(MethodName.Get());
             using (var context = new SqlCeContext())
             {
-                return context.BookFiles.Any(x => false);
+                return context.Authors.Any(x => x.FirstName == firstname && x.LastName == lastname);
             }
         }
 
-        public virtual async Task<IList<Book>> GetAllAsync(params Expression<Func<Book, object>>[] navigationProperties)
+        public virtual async Task<IList<Author>> GetAllAsync(params Expression<Func<Author, object>>[] navigationProperties)
         {
             Log.Debug(MethodName.Get());
-            List<Book> list;
+            List<Author> list;
             using (var context = new SqlCeContext())
             {
-                IQueryable<Book> dbQuery = context.Set<Book>();
+                IQueryable<Author> dbQuery = context.Set<Author>();
                 foreach (var navigationProperty in navigationProperties)
                 {
                     dbQuery = dbQuery.Include(navigationProperty);
@@ -40,24 +40,20 @@ namespace Bookie.Repository.Repositories
             return list;
         }
 
-        public List<Book> GetAllNested()
+        public List<Author> GetAllNested()
         {
             Log.Debug(MethodName.Get());
             using (var ctx = new SqlCeContext())
             {
                 return
-                    ctx.Books
-                        .Include(b => b.BookFiles)
-                        .Include(c => c.CoverImage)
-                        .Include(r => r.Authors)
-                        .Include(r => r.Publishers)
+                    ctx.Authors
                         .AsNoTracking()
                         .ToList();
             }
         }
 
 
-        public BookRepository(ISettings settings, ILog log) : base(settings, log)
+        public AuthorRepository(ISettings settings, ILog log) : base(settings, log)
         {
         }
     }

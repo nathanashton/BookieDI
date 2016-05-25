@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using Bookie.Common.Entities;
-using Bookie.Common.Interfaces;
 
 namespace Bookie.Repository
 {
