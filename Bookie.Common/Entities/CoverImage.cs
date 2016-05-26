@@ -2,21 +2,19 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using Bookie.Common.Interfaces;
-using PropertyChanged;
 
 namespace Bookie.Common.Entities
 {
-    [ImplementPropertyChanged]
     public class CoverImage : IBookFile
     {
-        public int Id { get; set; }
-        public string FullPathAndFileName { get; set; }
-        public long FileSize { get; set; }
-        public DateTime? ModifiedDateTime { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string FullPathAndFileName { get; set; }
+        public virtual long FileSize { get; set; }
+        public virtual DateTime? ModifiedDateTime { get; set; }
 
 
         [NotMapped]
-        public string FileName
+        public virtual string FileName
         {
             get
             {
@@ -29,7 +27,7 @@ namespace Bookie.Common.Entities
         }
 
         [NotMapped]
-        public string FileExtension
+        public virtual string FileExtension
         {
             get
             {
@@ -43,7 +41,5 @@ namespace Bookie.Common.Entities
 
         public virtual Book Book { get; set; }
 
-        [NotMapped]
-        public EntityState EntityState { get; set; }
     }
 }

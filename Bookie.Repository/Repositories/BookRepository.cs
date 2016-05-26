@@ -1,64 +1,84 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Bookie.Common;
 using Bookie.Common.Entities;
-using Bookie.Common.Interfaces;
 using Bookie.Repository.Interfaces;
+using NHibernate.Linq;
 
 namespace Bookie.Repository.Repositories
 {
-    public class BookRepository : GenericDataRepository<Book>, IBookRepository
+    public class BookRepository : IBookRepository
     {
+        private readonly IDatabase _database;
 
-        public bool Exists(string filePath)
+        public BookRepository(IDatabase database)
         {
-            Log.Debug(MethodName.Get());
-            using (var context = new SqlCeContext())
-            {
-                return context.BookFiles.Any(x => false);
-            }
+            _database = database;
         }
 
-        public virtual async Task<IList<Book>> GetAllAsync(params Expression<Func<Book, object>>[] navigationProperties)
+        public IList<Book> GetAll()
         {
-            Log.Debug(MethodName.Get());
-            List<Book> list;
-            using (var context = new SqlCeContext())
+            IList<Book> all;
+            using (var session = _database.SessionFactory.OpenSession())
             {
-                IQueryable<Book> dbQuery = context.Set<Book>();
-                foreach (var navigationProperty in navigationProperties)
-                {
-                    dbQuery = dbQuery.Include(navigationProperty);
-                }
-                list = await dbQuery.AsNoTracking().ToListAsync();
-            }
-
-            return list;
-        }
-
-        public List<Book> GetAllNested()
-        {
-            Log.Debug(MethodName.Get());
-            using (var ctx = new SqlCeContext())
-            {
-                return
-                    ctx.Books
-                        .Include(b => b.BookFiles)
-                        .Include(c => c.CoverImage)
-                        .Include(r => r.Authors)
-                        .Include(r => r.Publishers)
-                        .AsNoTracking()
+                all =
+                    session.Query<Book>()
+                        .FetchMany(x => x.Authors)
+                        .FetchMany(r => r.Publishers)
+                        .FetchMany(x => x.BookFiles)
+                        .Fetch(c => c.CoverImage)
                         .ToList();
             }
+            return all;
         }
 
-
-        public BookRepository(ISettings settings, ILog log) : base(settings, log)
+        public Book GetById(int id)
         {
+            Book book;
+            using (var session = _database.SessionFactory.OpenSession())
+            {
+                book = session.Query<Book>().FetchMany(x => x.Authors)
+                    .FetchMany(r => r.Publishers)
+                    .FetchMany(x => x.BookFiles)
+                    .Fetch(c => c.CoverImage).FirstOrDefault(x => x.Id == id);
+            }
+            return book;
+        }
+
+        public List<Book> GetByTitle(string title)
+        {
+            List<Book> books;
+            using (var session = _database.SessionFactory.OpenSession())
+            {
+                books = session.Query<Book>().FetchMany(x => x.Authors)
+                    .FetchMany(r => r.Publishers)
+                    .FetchMany(x => x.BookFiles)
+                    .Fetch(c => c.CoverImage).Where(x => x.Title.Contains(title)).ToList();
+            }
+            return books;
+        }
+
+        public void Persist(Book book)
+        {
+            using (var session = _database.SessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.SaveOrUpdate(book);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public void Remove(Book book)
+        {
+            using (var session = _database.SessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Delete(book);
+                    transaction.Commit();
+                }
+            }
         }
     }
 }

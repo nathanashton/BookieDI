@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Bookie.Common.Entities;
 
 namespace Bookie.Repository.Interfaces
 {
-    public interface IBookRepository : IGenericDataRepository<Book>
+    public interface IBookRepository
     {
-        bool Exists(string filePath);
-        Task<IList<Book>> GetAllAsync(params Expression<Func<Book, object>>[] navigationProperties);
-        List<Book> GetAllNested();
+        IList<Book> GetAll();
+        Book GetById(int id);
+        List<Book> GetByTitle(string title);
+        void Persist(Book book);
+        void Remove(Book book);
     }
 }

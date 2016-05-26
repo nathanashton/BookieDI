@@ -17,7 +17,7 @@ namespace Bookie.Common
 
         public string ApplicationPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
 
-        public string DatabasePath => Path.Combine(ApplicationPath, "bookie.sdf");
+        public string DatabasePath => Path.Combine(ApplicationPath, "bookie.db");
         public string ImageCoversPath => ApplicationPath + @"\Covers\";
     }
 }
