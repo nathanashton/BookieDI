@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Bookie.Common.Entities;
+using System;
 using System.Collections.Generic;
-using Bookie.Common.Entities;
 
 namespace Bookie.Common.Interfaces
 {

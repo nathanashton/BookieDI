@@ -58,6 +58,10 @@
     <Compile Include="Interfaces\IAuthor.cs" />
     <Compile Include="Interfaces\IBook.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="Plugin\DescriptionAttribute.cs" />
+    <Compile Include="Plugin\DisplayNameAttribute.cs" />
+    <Compile Include="Plugin\FormatPlugin.cs" />
+    <Compile Include="Plugin\IFormatPlugin.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\IPublisher.cs" />
     <Compile Include="Interfaces\ISettings.cs" />

@@ -5,7 +5,6 @@ namespace Bookie.Repository.Mapping
 {
     public class CoverImageMap : ClassMap<CoverImage>
     {
-
         public CoverImageMap()
         {
             Id(c => c.Id);

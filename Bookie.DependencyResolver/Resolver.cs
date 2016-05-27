@@ -18,10 +18,15 @@ namespace Bookie.DependencyResolver
         {
             Container = new UnityContainer();
 
-            Container.RegisterType<IAuthorRepository, AuthorRepository>();
             Container.RegisterType<IDatabase, Database>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IBookRepository, BookRepository>();
+            Container.RegisterType<IBookFileRepository, BookFileRepository>();
+
+            Container.RegisterType<IImporter, Importer>();
+
             Container.RegisterType<IBookCore, BookCore>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IBookFileCore, BookFileCore>(new ContainerControlledLifetimeManager());
+
             Container.RegisterType<ISettings, Settings>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILog, Log>(new ContainerControlledLifetimeManager());
             return Container;

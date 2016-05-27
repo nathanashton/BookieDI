@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Bookie.Common.Interfaces;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
-using Bookie.Common.Interfaces;
 
 namespace Bookie.Common.Entities
 {
@@ -11,7 +11,6 @@ namespace Bookie.Common.Entities
         public virtual string FullPathAndFileName { get; set; }
         public virtual long FileSize { get; set; }
         public virtual DateTime? ModifiedDateTime { get; set; }
-
 
         [NotMapped]
         public virtual string FileName
@@ -41,5 +40,10 @@ namespace Bookie.Common.Entities
 
         public virtual Book Book { get; set; }
 
+        public virtual void AddBook(Book book)
+        {
+            book.CoverImage = this;
+            Book = book;
+        }
     }
 }

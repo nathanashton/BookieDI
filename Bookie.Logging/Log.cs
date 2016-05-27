@@ -1,7 +1,8 @@
-﻿using System;
-using System.Reflection;
-using log4net;
+﻿using log4net;
 using log4net.Core;
+using log4net.Repository.Hierarchy;
+using System;
+using System.Reflection;
 using ILog = Bookie.Common.Interfaces.ILog;
 
 namespace Bookie.Logging
@@ -13,15 +14,15 @@ namespace Bookie.Logging
 
         public void SetDebugLevel()
         {
-            ((log4net.Repository.Hierarchy.Hierarchy)LogManager.GetRepository()).Root.Level = Level.Debug;
-            ((log4net.Repository.Hierarchy.Hierarchy)LogManager.GetRepository()).RaiseConfigurationChanged(EventArgs.Empty);
+            ((Hierarchy)LogManager.GetRepository()).Root.Level = Level.Debug;
+            ((Hierarchy)LogManager.GetRepository()).RaiseConfigurationChanged(EventArgs.Empty);
             log.Info("Logging level set at DEBUG");
         }
 
         public void SetInfoLevel()
         {
-            ((log4net.Repository.Hierarchy.Hierarchy)LogManager.GetRepository()).Root.Level = Level.Info;
-            ((log4net.Repository.Hierarchy.Hierarchy)LogManager.GetRepository()).RaiseConfigurationChanged(EventArgs.Empty);
+            ((Hierarchy)LogManager.GetRepository()).Root.Level = Level.Info;
+            ((Hierarchy)LogManager.GetRepository()).RaiseConfigurationChanged(EventArgs.Empty);
             log.Info("Logging level set at INFO");
         }
 

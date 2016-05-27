@@ -4,7 +4,6 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
-using NHibernate.PropertyChanged;
 using NHibernate.Tool.hbm2ddl;
 
 namespace Bookie.Repository
@@ -12,7 +11,6 @@ namespace Bookie.Repository
     public class Database : IDatabase
     {
         private readonly ISettings _settings;
-
 
         public Database(ISettings settings)
         {
@@ -30,7 +28,6 @@ namespace Bookie.Repository
                 .ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
         }
-
 
         public void BuildSchema(Configuration config)
         {

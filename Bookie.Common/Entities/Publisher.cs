@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Bookie.Common.Interfaces;
+using System;
 using System.Collections.Generic;
-using Bookie.Common.Interfaces;
 
 namespace Bookie.Common.Entities
 {
@@ -10,12 +10,12 @@ namespace Bookie.Common.Entities
         public virtual string Name { get; set; }
         public virtual DateTime? ModifiedDateTime { get; set; }
 
-        public virtual ISet<Book> Books { get; set; }
+        public virtual ISet<Book> Books { get; set; } = new HashSet<Book>();
 
-        public Publisher()
+        public virtual void AddBook(Book book)
         {
-            Books = new HashSet<Book>();
+            book.Publishers.Add(this);
+            Books.Add(book);
         }
-
     }
 }

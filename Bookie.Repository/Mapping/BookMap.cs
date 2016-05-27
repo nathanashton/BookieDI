@@ -5,7 +5,6 @@ namespace Bookie.Repository.Mapping
 {
     public class BookMap : ClassMap<Book>
     {
-
         public BookMap()
         {
             Id(c => c.Id);

@@ -7,5 +7,4 @@ namespace Bookie.Common.Interfaces
         int Id { get; set; }
         DateTime? ModifiedDateTime { get; set; }
     }
-
 }

@@ -6,10 +6,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <DockPanel>
-        <StackPanel DockPanel.Dock="Bottom"  Orientation="Horizontal">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <Button Content="Add Books" Command="{Binding AddBooksCommand}" />
             <Button Content="Get Books" Command="{Binding GetBooksCommand}" />
-
         </StackPanel>
         <DataGrid ItemsSource="{Binding Books}" />
     </DockPanel>

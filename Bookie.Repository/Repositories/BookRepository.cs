@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Bookie.Common.Entities;
+﻿using Bookie.Common.Entities;
 using Bookie.Repository.Interfaces;
 using NHibernate.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Bookie.Repository.Repositories
 {

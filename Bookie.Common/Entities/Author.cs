@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Bookie.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Bookie.Common.Interfaces;
 
 namespace Bookie.Common.Entities
 {
@@ -13,18 +13,15 @@ namespace Bookie.Common.Entities
         public virtual string LastName { get; set; }
         public virtual string Biography { get; set; }
 
-    
-        public virtual ISet<Book> Books { get; set; }
+        public virtual ISet<Book> Books { get; set; } = new HashSet<Book>();
 
         [NotMapped]
         public virtual string FullName => LastName + ", " + FirstName;
 
-        public Author()
+        public virtual void AddBook(Book book)
         {
-            Books = new HashSet<Book>();
+            book.Authors.Add(this);
+            Books.Add(book);
         }
-
-
-
     }
 }

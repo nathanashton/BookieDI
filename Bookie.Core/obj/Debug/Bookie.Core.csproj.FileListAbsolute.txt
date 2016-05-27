@@ -5,6 +5,7 @@ C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Repository.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\NHibernate.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\FluentNHibernate.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Iesi.Collections.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Common.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.Core\bin\Debug\Bookie.Repository.pdb

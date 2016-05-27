@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using Bookie.Common.Interfaces;
+﻿using Bookie.Common.Interfaces;
 using Bookie.DependencyResolver;
 using Bookie.ViewModels;
 using Bookie.Views;
 using Microsoft.Practices.Unity;
+using System;
+using System.IO;
+using System.Windows;
 
 namespace Bookie
 {

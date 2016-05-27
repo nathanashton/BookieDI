@@ -1,7 +1,6 @@
 ﻿namespace Bookie.Repository.Interfaces
 {
-    public interface IAuthorRepository 
+    public interface IAuthorRepository
     {
-
     }
 }
