@@ -1,89 +1,73 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace Bookie.Format.Mobi.Metadata
 {
-    public class PalmDOCHead : BaseHeader
+    public class PalmDocHead : BaseHeader
     {
-        private byte[] compression = new byte[2];
-        private byte[] unused0 = new byte[2];
-        private byte[] textLength = new byte[4];
-        private byte[] recordCount = new byte[2];
-        private byte[] recordSize = new byte[2];
-        private byte[] encryptionType = new byte[2];
-        private byte[] unused1 = new byte[2];
+        private readonly byte[] _compression = new byte[2];
+        private readonly byte[] _unused0 = new byte[2];
+        private readonly byte[] _textLength = new byte[4];
+        private readonly byte[] _recordCount = new byte[2];
+        private readonly byte[] _recordSize = new byte[2];
+        private readonly byte[] _encryptionType = new byte[2];
+        private readonly byte[] _unused1 = new byte[2];
 
-        public PalmDOCHead()
+        public PalmDocHead()
         {
             PopulateFieldList(true);
         }
 
-        public PalmDOCHead(FileStream fs)
+        public PalmDocHead(FileStream fs)
         {
-            fs.Read(this.compression, 0, this.compression.Length);
-            fs.Read(this.unused0, 0, this.unused0.Length);
-            fs.Read(this.textLength, 0, this.textLength.Length);
-            fs.Read(this.recordCount, 0, this.recordCount.Length);
+            fs.Read(_compression, 0, _compression.Length);
+            fs.Read(_unused0, 0, _unused0.Length);
+            fs.Read(_textLength, 0, _textLength.Length);
+            fs.Read(_recordCount, 0, _recordCount.Length);
 
-            fs.Read(this.recordSize, 0, this.recordSize.Length);
-            fs.Read(this.encryptionType, 0, this.encryptionType.Length);
-            fs.Read(this.unused1, 0, this.unused1.Length);
+            fs.Read(_recordSize, 0, _recordSize.Length);
+            fs.Read(_encryptionType, 0, _encryptionType.Length);
+            fs.Read(_unused1, 0, _unused1.Length);
 
             PopulateFieldList();
         }
 
         //Properties
-        public ushort Compression
-        {
-            get { return Converter.ToUInt16(this.compression); }
-        }
+        public ushort Compression => Converter.ToUInt16(_compression);
 
         public string CompressionAsString
         {
             get
             {
-                switch (this.Compression)
+                switch (Compression)
                 {
                     case 1: return "None";
                     case 2: return "PalmDOC";
                     case 17480: return "HUFF/CDIC";
                     default:
-                        return String.Format("Unknown (0)", this.Compression);
+                        return $"Unknown {Compression}";
                 }
             }
         }
 
-        public uint TextLength
-        {
-            get { return Converter.ToUInt32(this.textLength); }
-        }
+        public uint TextLength => Converter.ToUInt32(_textLength);
 
-        public ushort RecordCount
-        {
-            get { return Converter.ToUInt16(this.recordCount); }
-        }
+        public ushort RecordCount => Converter.ToUInt16(_recordCount);
 
-        public ushort RecordSize
-        {
-            get { return Converter.ToUInt16(this.recordSize); }
-        }
+        public ushort RecordSize => Converter.ToUInt16(_recordSize);
 
-        public ushort EncryptionType
-        {
-            get { return Converter.ToUInt16(this.encryptionType); }
-        }
+        public ushort EncryptionType => Converter.ToUInt16(_encryptionType);
 
         public string EncryptionTypeAsString
         {
             get
             {
-                switch (this.EncryptionType)
+                switch (EncryptionType)
                 {
                     case 0: return "None";
                     case 1: return "Old Mobipocket";
-                    case 2: return "Mobipocket"; ;
+                    case 2: return "Mobipocket";
                     default:
-                        return String.Format("Unknown (0)", this.EncryptionType);
+                        return $"Unknown {EncryptionType}";
                 }
             }
         }

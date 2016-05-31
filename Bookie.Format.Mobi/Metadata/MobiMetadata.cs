@@ -4,24 +4,15 @@ namespace Bookie.Format.Mobi.Metadata
 {
     public class MobiMetadata
     {
-        private PDBHead pdbHeader;
-        private PalmDOCHead palmDocHeader;
-        private MobiHead mobiHeader;
+        private PdbHead _pdbHeader;
+        private PalmDocHead _palmDocHeader;
+        private MobiHead _mobiHeader;
 
-        public PDBHead PDBHeader
-        {
-            get { return pdbHeader; }
-        }
+        public PdbHead PdbHeader => _pdbHeader;
 
-        public PalmDOCHead PalmDocHeader
-        {
-            get { return palmDocHeader; }
-        }
+        public PalmDocHead PalmDocHeader => _palmDocHeader;
 
-        public MobiHead MobiHeader
-        {
-            get { return mobiHeader; }
-        }
+        public MobiHead MobiHeader => _mobiHeader;
 
         public MobiMetadata(FileStream fs)
         {
@@ -30,18 +21,16 @@ namespace Bookie.Format.Mobi.Metadata
 
         public MobiMetadata(string filePath)
         {
-            System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             SetUpData(fs);
             fs.Close();
         }
 
         private void SetUpData(FileStream fs)
         {
-            pdbHeader = new PDBHead(fs);
-            palmDocHeader = new PalmDOCHead(fs);
-            mobiHeader = new MobiHead(fs, pdbHeader.MobiHeaderSize);
-
-
+            _pdbHeader = new PdbHead(fs);
+            _palmDocHeader = new PalmDocHead(fs);
+            _mobiHeader = new MobiHead(fs, _pdbHeader.MobiHeaderSize);
         }
     }
 }

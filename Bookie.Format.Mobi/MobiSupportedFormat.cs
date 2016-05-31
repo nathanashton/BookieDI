@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Bookie.Common.Plugin;
+using Bookie.Format.Mobi.Metadata;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
-using Bookie.Common.Plugin;
-using Bookie.Format.Mobi.Metadata;
 
 namespace Bookie.Format.Mobi
 {
@@ -26,16 +19,12 @@ namespace Bookie.Format.Mobi
         public string Activate()
         {
             var testfile = @"C:\Users\nathana\Downloads\18 Never Go Back.mobi";
-         
-
 
             using (var fs2 = new FileStream(testfile, FileMode.Open, FileAccess.Read))
             {
                 MobiMetadata meta = new MobiMetadata(fs2);
-                return meta.MobiHeader.EXTHHeader.UpdatedTitle;
+                return meta.MobiHeader.ExthHeader.UpdatedTitle;
             }
-
-
         }
 
         public void ExtractCover(string filePath)
@@ -44,7 +33,7 @@ namespace Bookie.Format.Mobi
             {
                 var s = CoverExtractor.ExtractCover(fs);
                 var image = Image.FromStream(s);
-              //  return image;
+                //  return image;
             }
         }
     }

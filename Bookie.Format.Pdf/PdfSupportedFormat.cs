@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows.Media.Imaging;
-using Bookie.Common.Exceptions;
+﻿using Bookie.Common.Exceptions;
 using Bookie.Common.Plugin;
+using Ghostscript.NET;
+using Ghostscript.NET.Rasterizer;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
-using System.Drawing;
+using System;
+using System.Drawing.Imaging;
 using System.IO;
-using libpdf;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Bookie.Format.Pdf
 {
@@ -18,10 +16,15 @@ namespace Bookie.Format.Pdf
     [Description("Provides support for the Adobe PDF Format using embedded iTextSharp library.")]
     public class PdfSupportedFormat : ISupportedFormatPlugin
     {
+        private readonly GhostscriptVersionInfo _gvi;
         private string _isbn = string.Empty;
 
         public PdfSupportedFormat()
         {
+            var currentPath = Directory.GetCurrentDirectory();
+            var ghostScriptDll = new DirectoryInfo(currentPath).GetFiles("gsdll32.dll", SearchOption.AllDirectories);
+            var meuDll = ghostScriptDll[0].FullName;
+            _gvi = new GhostscriptVersionInfo(new Version(0, 0, 0), meuDll, string.Empty, GhostscriptLicense.GPL);
             Format = "PDF Format";
         }
 
@@ -29,26 +32,23 @@ namespace Bookie.Format.Pdf
 
         public string Activate()
         {
-            return "Pdf";
+            return "Activate";
         }
 
         public void ExtractCover(string filePath)
         {
-            using (FileStream file = File.OpenRead(@"C:\temp\php.pdf")) // in file
+            var desired_x_dpi = 96;
+            var desired_y_dpi = 96;
+
+            var outputPath = @"C:\temp\books\test.png";
+
+            using (var rasterizer = new GhostscriptRasterizer())
             {
-                var bytes = new byte[file.Length];
-                file.Read(bytes, 0, bytes.Length);
-                using (var pdf = new LibPdf(bytes))
-                {
-                    byte[] pngBytes = pdf.GetImage(0, ImageType.BMP); // image type
-                    using (var outFile = File.Create(@"c:\temp\file.bmp")) // out file
-                    {
-                        outFile.Write(pngBytes, 0, pngBytes.Length);
-                   }
-                }
+                rasterizer.Open(filePath, _gvi, false);
+                var img = rasterizer.GetPage(desired_x_dpi, desired_y_dpi, 1);
+                img.Save(outputPath, ImageFormat.Png);
             }
         }
-
 
         public string Go(string url)
         {

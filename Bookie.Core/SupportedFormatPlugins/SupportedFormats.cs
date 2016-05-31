@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Bookie.Common.Interfaces;
+using Bookie.Common.Plugin;
+using Bookie.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
-using Bookie.Common.Interfaces;
-using Bookie.Common.Plugin;
-using Bookie.Core.Interfaces;
 
 namespace Bookie.Core.SupportedFormatPlugins
 {
@@ -34,12 +34,10 @@ namespace Bookie.Core.SupportedFormatPlugins
                     var assembly = Assembly.Load(an);
                     assemblies.Add(assembly);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    continue;
                 }
-
-        }
+            }
 
             var pluginType = typeof(ISupportedFormatPlugin);
             ICollection<Type> pluginTypes = new List<Type>();

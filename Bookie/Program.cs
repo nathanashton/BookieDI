@@ -1,4 +1,5 @@
 ﻿using Bookie.Common.Interfaces;
+using Bookie.Core.Interfaces;
 using Bookie.DependencyResolver;
 using Bookie.ViewModels;
 using Bookie.Views;
@@ -6,7 +7,6 @@ using Microsoft.Practices.Unity;
 using System;
 using System.IO;
 using System.Windows;
-using Bookie.Core.Interfaces;
 
 namespace Bookie
 {

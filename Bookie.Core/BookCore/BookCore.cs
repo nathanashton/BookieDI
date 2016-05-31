@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Bookie.Common;
+﻿using Bookie.Common;
 using Bookie.Common.Interfaces;
 using Bookie.Core.Interfaces;
 using Bookie.Repository.Interfaces;
 using PropertyChanged;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Bookie.Core.BookCore
 {

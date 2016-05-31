@@ -5,7 +5,6 @@ using Bookie.Helpers;
 using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Bookie.Format.Pdf;
 
 namespace Bookie.ViewModels
 {
@@ -52,14 +51,9 @@ namespace Bookie.ViewModels
 
         private void LoadPlugins()
         {
+            var all = _plugins.LoadedPlugins;
 
-
-         var all = _plugins.LoadedPlugins;
-
-            all[2].Plugin.ExtractCover(@"C:\temp\1147689142.pdf");
-
-
-
+            all[1].Plugin.ExtractCover(@"C:\temp\books\php.pdf");
         }
     }
 }

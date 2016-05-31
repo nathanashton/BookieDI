@@ -27,12 +27,7 @@ namespace Bookie.DependencyResolver
 
             Container.RegisterType<IImporter, Importer>();
 
-
-
-
             Container.RegisterType<ISupportedFormats, SupportedFormats>(new ContainerControlledLifetimeManager());
-
-
 
             Container.RegisterType<IBookCore, BookCore>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IBookFileCore, BookFileCore>(new ContainerControlledLifetimeManager());

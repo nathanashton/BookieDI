@@ -2,46 +2,31 @@
 
 namespace Bookie.Format.Mobi.Metadata
 {
-    public class EXTHRecord
+    public class ExthRecord
     {
-        private byte[] recordType = new byte[4];
-        private byte[] recordLength = new byte[4];
-        private byte[] recordData = null;
+        private readonly byte[] _recordType = new byte[4];
+        private readonly byte[] _recordLength = new byte[4];
+        private readonly byte[] _recordData;
 
-        public EXTHRecord(FileStream fs)
+        public ExthRecord(FileStream fs)
         {
-            fs.Read(this.recordType, 0, this.recordType.Length);
-            fs.Read(this.recordLength, 0, this.recordLength.Length);
+            fs.Read(_recordType, 0, _recordType.Length);
+            fs.Read(_recordLength, 0, _recordLength.Length);
 
-            if (this.RecordLength < 8) throw new IOException("Invalid EXTH record length");
-            this.recordData = new byte[this.RecordLength - 8];
-            fs.Read(this.recordData, 0, this.recordData.Length);
+            if (RecordLength < 8) throw new IOException("Invalid EXTH record length");
+            _recordData = new byte[RecordLength - 8];
+            fs.Read(_recordData, 0, _recordData.Length);
         }
 
         //Properties
-        public int DataLength
-        {
-            get { return this.recordData.Length; }
-        }
+        public int DataLength => _recordData.Length;
 
-        public int Size
-        {
-            get { return DataLength + 8; }
-        }
+        public int Size => DataLength + 8;
 
-        public uint RecordLength
-        {
-            get { return Converter.ToUInt32(this.recordLength); }
-        }
+        public uint RecordLength => Converter.ToUInt32(_recordLength);
 
-        public uint RecordType
-        {
-            get { return Converter.ToUInt32(this.recordType); }
-        }
+        public uint RecordType => Converter.ToUInt32(_recordType);
 
-        public byte[] RecordData
-        {
-            get { return this.recordData; }
-        }
+        public byte[] RecordData => _recordData;
     }
 }

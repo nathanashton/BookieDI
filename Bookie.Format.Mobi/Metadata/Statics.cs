@@ -33,7 +33,7 @@ namespace Bookie.Format.Mobi.Metadata
         {
             return BitConverter.ToUInt64(CheckBytes(bytes), 0);
         }
-        
+
         //Checks to see if system architecture is little-endian (e.g. little end first) and if so reverse the byte array
         private static byte[] CheckBytes(byte[] bytesToCheck)
         {

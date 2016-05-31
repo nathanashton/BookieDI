@@ -32,15 +32,13 @@ C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.WPF\bin\
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.WPF\bin\Debug\log4net.xml
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.WPF\obj\Debug\Bookie.exe
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie.WPF\obj\Debug\Bookie.pdb
-C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\itextsharp.dll
-C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\libpdf.dll
+C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Log4Net.config
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.exe.config
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.exe
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.Common.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.Core.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.DependencyResolver.dll
-C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.Format.Pdf.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Microsoft.Practices.Unity.dll
@@ -54,7 +52,6 @@ C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debu
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.Common.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.Core.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.DependencyResolver.pdb
-C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Bookie.Format.Pdf.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Users\nathana\Documents\Visual Studio 2015\Projects\Bookie-DI\Bookie\bin\Debug\Microsoft.Practices.Unity.xml

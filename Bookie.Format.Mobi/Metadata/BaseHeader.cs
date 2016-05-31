@@ -10,22 +10,13 @@ namespace Bookie.Format.Mobi.Metadata
         protected SortedDictionary<string, object> fieldListNoBlankRows = new SortedDictionary<string, object>();
         protected SortedDictionary<string, object> emptyFieldList = new SortedDictionary<string, object>(); //Used to get properties for a blank record
 
-        private List<string> fieldListExclude = new List<string>() { "FieldList", "FieldListNoBlankRows", "EmptyFieldList", "EXTHHeader" };
+        private readonly List<string> _fieldListExclude = new List<string>() { "FieldList", "FieldListNoBlankRows", "EmptyFieldList", "EXTHHeader" };
 
-        public SortedDictionary<string, object> FieldList
-        {
-            get { return this.fieldList; }
-        }
+        public SortedDictionary<string, object> FieldList => fieldList;
 
-        public SortedDictionary<string, object> FieldListNoBlankRows
-        {
-            get { return this.fieldListNoBlankRows; }
-        }
+        public SortedDictionary<string, object> FieldListNoBlankRows => fieldListNoBlankRows;
 
-        public SortedDictionary<string, object> EmptyFieldList
-        {
-            get { return this.emptyFieldList; }
-        }
+        public SortedDictionary<string, object> EmptyFieldList => emptyFieldList;
 
         public override string ToString()
         {
@@ -38,19 +29,18 @@ namespace Bookie.Format.Mobi.Metadata
 
             if (showBlankRows)
             {
-                foreach (KeyValuePair<string, object> kp in this.fieldList)
+                foreach (KeyValuePair<string, object> kp in fieldList)
                 {
-                    sb.AppendLine(String.Format("{0}: {1}", kp.Key, kp.Value));
+                    sb.AppendLine($"{kp.Key}: {kp.Value}");
                 }
             }
             else
             {
-                foreach (KeyValuePair<string, object> kp in this.fieldListNoBlankRows)
+                foreach (KeyValuePair<string, object> kp in fieldListNoBlankRows)
                 {
-                    sb.AppendLine(String.Format("{0}: {1}", kp.Key, kp.Value));
+                    sb.AppendLine($"{kp.Key}: {kp.Value}");
                 }
             }
-
 
             return sb.ToString();
         }
@@ -64,9 +54,9 @@ namespace Bookie.Format.Mobi.Metadata
         {
             fieldList.Clear();
             emptyFieldList.Clear();
-            foreach (System.Reflection.PropertyInfo propinfo in this.GetType().GetProperties())
+            foreach (System.Reflection.PropertyInfo propinfo in GetType().GetProperties())
             {
-                if (fieldListExclude.Contains(propinfo.Name)==false)
+                if (_fieldListExclude.Contains(propinfo.Name) == false)
                 {
                     if (!blankOnly)
                     {

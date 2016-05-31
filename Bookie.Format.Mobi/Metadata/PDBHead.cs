@@ -5,164 +5,118 @@ using System.Text;
 
 namespace Bookie.Format.Mobi.Metadata
 {
-    public class PDBHead : BaseHeader
+    public class PdbHead : BaseHeader
     {
-        private byte[] name = new byte[32];
+        private readonly byte[] _name = new byte[32];
 
-        private byte[] attributes = new byte[2];
-        private byte[] version = new byte[2];
-        private byte[] creationDate = new byte[4];
-        private byte[] modificationDate = new byte[4];
-        private byte[] lastBackupDate = new byte[4];
-        private byte[] modificationNumber = new byte[4];
-        private byte[] appInfoID = new byte[4];
-        private byte[] sortInfoID = new byte[4];
-        private byte[] type = new byte[4];
-        private byte[] creator = new byte[4];
-        private byte[] uniqueIDSeed = new byte[4];
-        private byte[] nextRecordListID = new byte[4];
-        private byte[] numRecords = new byte[2];
-        private List<RecordInfo> recordInfoList = new List<RecordInfo>();
-        private byte[] gapToData = new byte[2];
+        private readonly byte[] _attributes = new byte[2];
+        private readonly byte[] _version = new byte[2];
+        private readonly byte[] _creationDate = new byte[4];
+        private readonly byte[] _modificationDate = new byte[4];
+        private readonly byte[] _lastBackupDate = new byte[4];
+        private readonly byte[] _modificationNumber = new byte[4];
+        private readonly byte[] _appInfoId = new byte[4];
+        private readonly byte[] _sortInfoId = new byte[4];
+        private readonly byte[] _type = new byte[4];
+        private readonly byte[] _creator = new byte[4];
+        private readonly byte[] _uniqueIdSeed = new byte[4];
+        private readonly byte[] _nextRecordListId = new byte[4];
+        private readonly byte[] _numRecords = new byte[2];
+        private readonly List<RecordInfo> _recordInfoList = new List<RecordInfo>();
+        private readonly byte[] _gapToData = new byte[2];
 
-        public PDBHead()
+        public PdbHead()
         {
             PopulateFieldList(true);
         }
 
-        public PDBHead(FileStream fs)
+        public PdbHead(FileStream fs)
         {
-            fs.Read(this.name, 0, this.name.Length);
-            fs.Read(this.attributes, 0, this.attributes.Length);
-            fs.Read(this.version, 0, this.version.Length);
-            fs.Read(this.creationDate, 0, this.creationDate.Length);
-            fs.Read(this.modificationDate, 0, this.modificationDate.Length);
-            fs.Read(this.lastBackupDate, 0, this.lastBackupDate.Length);
-            fs.Read(this.modificationNumber, 0, this.modificationNumber.Length);
-            fs.Read(this.appInfoID, 0, this.appInfoID.Length);
-            fs.Read(this.sortInfoID, 0, this.sortInfoID.Length);
+            fs.Read(_name, 0, _name.Length);
+            fs.Read(_attributes, 0, _attributes.Length);
+            fs.Read(_version, 0, _version.Length);
+            fs.Read(_creationDate, 0, _creationDate.Length);
+            fs.Read(_modificationDate, 0, _modificationDate.Length);
+            fs.Read(_lastBackupDate, 0, _lastBackupDate.Length);
+            fs.Read(_modificationNumber, 0, _modificationNumber.Length);
+            fs.Read(_appInfoId, 0, _appInfoId.Length);
+            fs.Read(_sortInfoId, 0, _sortInfoId.Length);
 
-            fs.Read(this.type, 0, this.type.Length);
-            fs.Read(this.creator, 0, this.creator.Length);
-            fs.Read(this.uniqueIDSeed, 0, this.uniqueIDSeed.Length);
-            fs.Read(this.nextRecordListID, 0, this.nextRecordListID.Length);
-            fs.Read(this.numRecords, 0, this.numRecords.Length);
+            fs.Read(_type, 0, _type.Length);
+            fs.Read(_creator, 0, _creator.Length);
+            fs.Read(_uniqueIdSeed, 0, _uniqueIdSeed.Length);
+            fs.Read(_nextRecordListId, 0, _nextRecordListId.Length);
+            fs.Read(_numRecords, 0, _numRecords.Length);
 
-            int recordCount = Converter.ToInt16(this.numRecords);
+            int recordCount = Converter.ToInt16(_numRecords);
 
             for (int i = 0; i < recordCount; i++)
             {
-                this.recordInfoList.Add(new RecordInfo(fs));
+                _recordInfoList.Add(new RecordInfo(fs));
             }
 
-            fs.Read(this.gapToData, 0, this.gapToData.Length);
+            fs.Read(_gapToData, 0, _gapToData.Length);
 
             PopulateFieldList();
         }
 
-        public string Name
-        {
-            get { return Encoding.ASCII.GetString(this.name).Replace("\0", String.Empty); }
-        }
+        public string Name => Encoding.ASCII.GetString(_name).Replace("\0", String.Empty);
 
-        public ushort Attributes
-        {
-            get { return Converter.ToUInt16(this.attributes); }
-        }
+        public ushort Attributes => Converter.ToUInt16(_attributes);
 
-        public ushort Version
-        {
-            get { return Converter.ToUInt16(this.version); }
-        }
+        public ushort Version => Converter.ToUInt16(_version);
 
-        public uint CreationDate
-        {
-            get { return Converter.ToUInt32(this.creationDate); }
-        }
+        public uint CreationDate => Converter.ToUInt32(_creationDate);
 
-        public uint ModificationDate
-        {
-            get { return Converter.ToUInt32(this.creationDate); }
-        }
+        public uint ModificationDate => Converter.ToUInt32(_creationDate);
 
-        public uint LastBackupDate
-        {
-            get { return Converter.ToUInt32(this.lastBackupDate); }
-        }
+        public uint LastBackupDate => Converter.ToUInt32(_lastBackupDate);
 
-        public uint ModificationNumber
-        {
-            get { return Converter.ToUInt32(this.modificationNumber); }
-        }
+        public uint ModificationNumber => Converter.ToUInt32(_modificationNumber);
 
-        public uint AppInfoID
-        {
-            get { return Converter.ToUInt32(this.appInfoID); }
-        }
+        public uint AppInfoId => Converter.ToUInt32(_appInfoId);
 
-        public uint SortInfoID
-        {
-            get { return Converter.ToUInt32(this.sortInfoID); }
-        }
+        public uint SortInfoId => Converter.ToUInt32(_sortInfoId);
 
-        public uint Type
-        {
-            get { return Converter.ToUInt32(this.type); }
-        }
+        public uint Type => Converter.ToUInt32(_type);
 
-        public uint Creator
-        {
-            get { return Converter.ToUInt32(this.creator); }
-        }
+        public uint Creator => Converter.ToUInt32(_creator);
 
-        public uint UniqueIDSeed
-        {
-            get { return Converter.ToUInt32(this.uniqueIDSeed); }
-        }
+        public uint UniqueIdSeed => Converter.ToUInt32(_uniqueIdSeed);
 
-        public ushort NumRecords
-        {
-            get { return Converter.ToUInt16(this.numRecords); }
-        }
+        public ushort NumRecords => Converter.ToUInt16(_numRecords);
 
-        public ushort GapToData
-        {
-            get { return Converter.ToUInt16(this.gapToData); }
-        }
+        public ushort GapToData => Converter.ToUInt16(_gapToData);
 
         public uint MobiHeaderSize
         {
             get
             {
-                if (this.recordInfoList.Count > 1)
+                if (_recordInfoList.Count > 1)
                 {
-                    return ((RecordInfo)this.recordInfoList[1]).RecordDataOffset - ((RecordInfo)this.recordInfoList[0]).RecordDataOffset;
+                    return _recordInfoList[1].RecordDataOffset - _recordInfoList[0].RecordDataOffset;
                 }
                 else
                 {
                     return 0;
                 }
-
             }
         }
 
         public class RecordInfo
         {
-            private byte[] recordDataOffset = new byte[4];
-            private byte recordAttributes = 0;
-            private byte[] uniqueID = new byte[3];
+            private readonly byte[] _recordDataOffset = new byte[4];
+            private byte _recordAttributes;
+            private readonly byte[] _uniqueId = new byte[3];
 
             public RecordInfo(FileStream fs)
             {
-                fs.Read(this.recordDataOffset, 0, this.recordDataOffset.Length);
-                recordAttributes = (byte)fs.ReadByte();
-                fs.Read(this.uniqueID, 0, this.uniqueID.Length);
+                fs.Read(_recordDataOffset, 0, _recordDataOffset.Length);
+                _recordAttributes = (byte)fs.ReadByte();
+                fs.Read(_uniqueId, 0, _uniqueId.Length);
             }
 
-            public uint RecordDataOffset
-            {
-                get { return Converter.ToUInt32(this.recordDataOffset); }
-            }
+            public uint RecordDataOffset => Converter.ToUInt32(_recordDataOffset);
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System.Drawing;
-using System.Net.Mime;
-using System.Windows.Media.Imaging;
-
-namespace Bookie.Common.Plugin
+﻿namespace Bookie.Common.Plugin
 {
     public interface ISupportedFormatPlugin
     {
@@ -10,6 +6,6 @@ namespace Bookie.Common.Plugin
 
         string Activate();
 
-       void ExtractCover(string filePath);
+        void ExtractCover(string filePath);
     }
 }

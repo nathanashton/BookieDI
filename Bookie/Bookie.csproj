@@ -26,8 +26,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -59,21 +59,9 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Net.Http.WebRequest" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -142,10 +130,6 @@
     <ProjectReference Include="..\Bookie.DependencyResolver\Bookie.DependencyResolver.csproj">
       <Project>{55462379-e855-495e-b91d-149f8b44329a}</Project>
       <Name>Bookie.DependencyResolver</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bookie.Format.Pdf\Bookie.Format.Pdf.csproj">
-      <Project>{c3a5221a-ce1d-430d-8030-e5d2234dac8c}</Project>
-      <Name>Bookie.Format.Pdf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
