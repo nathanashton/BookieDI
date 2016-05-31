@@ -52,13 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookCore.cs" />
-    <Compile Include="BookFileCore.cs" />
+    <Compile Include="BookCore\BookCore.cs" />
+    <Compile Include="BookFileCore\BookFileCore.cs" />
+    <Compile Include="Interfaces\ISupportedFormats.cs" />
     <Compile Include="Interfaces\IImporter.cs" />
     <Compile Include="Importer.cs" />
     <Compile Include="Interfaces\IBookCore.cs" />
     <Compile Include="Interfaces\IBookFileCore.cs" />
-    <Compile Include="FormatPlugins.cs" />
+    <Compile Include="SupportedFormatPlugins\SupportedFormats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>

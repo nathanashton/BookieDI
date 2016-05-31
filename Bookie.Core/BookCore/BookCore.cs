@@ -1,13 +1,12 @@
-﻿using Bookie.Common;
-using Bookie.Common.Entities;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Bookie.Common;
 using Bookie.Common.Interfaces;
 using Bookie.Core.Interfaces;
 using Bookie.Repository.Interfaces;
 using PropertyChanged;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
-namespace Bookie.Core
+namespace Bookie.Core.BookCore
 {
     [ImplementPropertyChanged]
     public class BookCore : IBookCore
@@ -17,7 +16,7 @@ namespace Bookie.Core
 
         private readonly ILog _log;
 
-        private ObservableCollection<Book> _books;
+        private ObservableCollection<Common.Entities.Book> _books;
 
         public BookCore(IBookRepository bookRepository, IBookFileCore bookFileCore, ILog log)
         {
@@ -25,23 +24,23 @@ namespace Bookie.Core
             _bookFileCore = bookFileCore;
             _log = log;
             _log.Debug(MethodName.Get());
-            _books = new ObservableCollection<Book>();
+            _books = new ObservableCollection<Common.Entities.Book>();
         }
 
-        public ObservableCollection<Book> GetAllBooks()
+        public ObservableCollection<Common.Entities.Book> GetAllBooks()
         {
             _log.Debug(MethodName.Get());
-            return _books ?? (_books = new ObservableCollection<Book>(_bookRepository.GetAll()));
+            return _books ?? (_books = new ObservableCollection<Common.Entities.Book>(_bookRepository.GetAll()));
         }
 
-        public ObservableCollection<Book> GetAllBooksFromRepository()
+        public ObservableCollection<Common.Entities.Book> GetAllBooksFromRepository()
         {
             _log.Debug(MethodName.Get());
-            _books = new ObservableCollection<Book>(_bookRepository.GetAll());
+            _books = new ObservableCollection<Common.Entities.Book>(_bookRepository.GetAll());
             return _books;
         }
 
-        public void Persist(Book book)
+        public void Persist(Common.Entities.Book book)
         {
             _log.Debug(MethodName.Get());
             if (book == null) return;
@@ -57,7 +56,7 @@ namespace Bookie.Core
             //_books.Add(book);
         }
 
-        public bool Exists(Book book)
+        public bool Exists(Common.Entities.Book book)
         {
             _log.Debug(MethodName.Get());
             var exists = false;
@@ -68,13 +67,13 @@ namespace Bookie.Core
             return exists;
         }
 
-        public Book GetBookById(int id)
+        public Common.Entities.Book GetBookById(int id)
         {
             _log.Debug(MethodName.Get());
             return _bookRepository.GetById(id);
         }
 
-        public List<Book> GetBookByTitle(string title)
+        public List<Common.Entities.Book> GetBookByTitle(string title)
         {
             _log.Debug(MethodName.Get());
             return _bookRepository.GetByTitle(title);

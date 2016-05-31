@@ -4,7 +4,7 @@ using Bookie.Common.Interfaces;
 using Bookie.Core.Interfaces;
 using Bookie.Repository.Interfaces;
 
-namespace Bookie.Core
+namespace Bookie.Core.BookFileCore
 {
     public class BookFileCore : IBookFileCore
     {

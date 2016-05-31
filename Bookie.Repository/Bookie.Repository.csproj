@@ -69,7 +69,7 @@
   <ItemGroup>
     <Compile Include="Repositories\BookFileRepository.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="IDatabase.cs" />
+    <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Interfaces\IAuthorRepository.cs" />
     <Compile Include="Interfaces\IBookFileRepository.cs" />
     <Compile Include="Interfaces\IBookRepository.cs" />

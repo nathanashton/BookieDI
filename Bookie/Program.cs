@@ -6,6 +6,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.IO;
 using System.Windows;
+using Bookie.Core.Interfaces;
 
 namespace Bookie
 {
@@ -19,12 +20,14 @@ namespace Bookie
             container.RegisterType<MainWindowViewModel>();
             var log = container.Resolve<ILog>();
             var settings = container.Resolve<ISettings>();
-            log.Info("Application Started");
-            RunApplication(container, log, settings);
+            var plugins = container.Resolve<ISupportedFormats>();
+            RunApplication(container, log, settings, plugins);
         }
 
-        private static void RunApplication(UnityContainer container, ILog log, ISettings settings)
+        private static void RunApplication(UnityContainer container, ILog log, ISettings settings, ISupportedFormats plugins)
         {
+            log.Info("Application Started");
+            plugins.LoadFromPath("Plugins", true);
             try
             {
                 if (!Directory.Exists(settings.ApplicationPath))

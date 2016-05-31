@@ -1,7 +1,7 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
 
-namespace Bookie.Repository
+namespace Bookie.Repository.Interfaces
 {
     public interface IDatabase
     {

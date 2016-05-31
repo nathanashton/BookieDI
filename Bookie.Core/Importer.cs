@@ -3,7 +3,6 @@ using Bookie.Common.Interfaces;
 using Bookie.Core.Interfaces;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 
 namespace Bookie.Core
 {
@@ -56,7 +55,7 @@ namespace Bookie.Core
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (var i = 1; i < _allFiles.Count(); i++)
+            for (var i = 1; i < _allFiles.Length; i++)
             {
                 if (Worker.CancellationPending)
                 {
@@ -70,7 +69,7 @@ namespace Bookie.Core
                 book.AddBookFile(bookfile);
                 _bookCore.Persist(book);
 
-                var percentage = Utils.CalculatePercentage(i, 1, _allFiles.Count());
+                var percentage = Utils.CalculatePercentage(i, 1, _allFiles.Length);
                 Worker.ReportProgress(percentage, null);
             }
         }

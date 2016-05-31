@@ -1,4 +1,5 @@
 ﻿using Bookie.Common.Interfaces;
+using Bookie.Repository.Interfaces;
 using Bookie.Repository.Mapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;

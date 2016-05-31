@@ -7,6 +7,7 @@ namespace Bookie.Core
         public static int CalculatePercentage(int current, int startIndex, int endIndex)
         {
             float range = endIndex - startIndex;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (range == 0)
             {
                 range = 1;
