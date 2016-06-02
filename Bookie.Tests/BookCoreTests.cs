@@ -11,10 +11,13 @@ namespace Bookie.Tests
     {
         private Author _author;
         private Author _author2;
+        private Author _author3;
         private Book _book;
         private Book _book2;
+        private Book _book3;
         private Publisher _publisher;
         private Publisher _publisher2;
+        private Publisher _publisher3;
         private BookFile _bookFile;
 
         public IBookCore Seed()
@@ -31,12 +34,19 @@ namespace Bookie.Tests
             _book.AddBookFile(_bookFile);
             core.Persist(_book);
 
-            _book2 = new Book { Title = "This is a test book" };
+            _book2 = new Book { Title = "This is another test book" };
             _author2 = new Author { FirstName = "David", LastName = "Jones" };
             _publisher2 = new Publisher { Name = "Microsoft Press" };
             _book2.AddAuthor(_author2);
             _book2.AddPublisher(_publisher2);
             core.Persist(_book2);
+
+            _book3 = new Book { Title = "This is another another test book" };
+            _author3 = new Author { FirstName = "David", LastName = "Jones" };
+            _publisher3 = new Publisher { Name = "Microsoft Press" };
+            _book3.AddAuthor(_author3);
+            _book3.AddPublisher(_publisher3);
+            core.Persist(_book3);
             return core;
         }
 
@@ -56,7 +66,7 @@ namespace Bookie.Tests
         {
             var core = Seed();
             var allBooks = core.GetAllBooks();
-            Assert.IsTrue(allBooks.Count == 2);
+            Assert.IsTrue(allBooks.Count == 3);
             Assert.IsTrue(allBooks[0].Authors.ToList().Count == 1);
             Assert.IsTrue(allBooks[1].Authors.ToList()[0].FullName == "Jones, David");
         }
@@ -66,7 +76,7 @@ namespace Bookie.Tests
         {
             var core = Seed();
             var exists = core.Exists(_book);
-            Assert.IsTrue(exists);
+            Assert.IsTrue(exists != 0);
         }
 
         [TestMethod]
@@ -86,6 +96,29 @@ namespace Bookie.Tests
             Assert.AreEqual(_book.Title, bookFromDb[0].Title);
             Assert.AreEqual(_book.Id, bookFromDb[0].Id);
             Assert.IsTrue(bookFromDb[0].Authors.ToList()[0].FullName == "Clancy, Tom");
+        }
+
+        [TestMethod]
+        public void PersistExistingAuthor()
+        {
+            var core = Seed();
+            var bookFromDb = core.GetBookByTitle(_book2.Title);
+            var bookFromDb2 = core.GetBookByTitle(_book3.Title);
+            Assert.AreEqual(bookFromDb[0].Authors.ToList()[0].Id, bookFromDb2[0].Authors.ToList()[0].Id);
+            Assert.AreEqual(bookFromDb[0].Authors.ToList()[0].FirstName, bookFromDb2[0].Authors.ToList()[0].FirstName);
+            Assert.AreEqual(bookFromDb[0].Authors.ToList()[0].LastName, bookFromDb2[0].Authors.ToList()[0].LastName);
+        }
+
+        [TestMethod]
+        public void UpdateExistingBook()
+        {
+            var core = Seed();
+            var existing = core.GetBookById(_book.Id);
+            _book.Title = "Title has been updated";
+            core.Persist(_book);
+            var bytitle = core.GetBookByTitle("Title has been updated");
+            Assert.IsNotNull(bytitle);
+            Assert.AreEqual(existing.Id, bytitle[0].Id);
         }
     }
 }

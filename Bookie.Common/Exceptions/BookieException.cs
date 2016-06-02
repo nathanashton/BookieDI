@@ -15,6 +15,11 @@ namespace Bookie.Common.Exceptions
         {
         }
 
+        public BookieException(Exception innerException, string message = "")
+    : base(message, innerException)
+        {
+        }
+
         public BookieException(string format, params object[] args)
             : base(string.Format(format, args))
         {

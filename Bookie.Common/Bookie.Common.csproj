@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Empty Database|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Empty Database\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;EMPTYDATABASE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PropertyChanged, Version=1.51.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
@@ -42,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -50,6 +60,7 @@
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\BookFile.cs" />
     <Compile Include="Entities\CoverImage.cs" />
+    <Compile Include="EventArgs\BookEventArgs.cs" />
     <Compile Include="Exceptions\BookieException.cs" />
     <Compile Include="Exceptions\BookieRepositoryException.cs" />
     <Compile Include="Interfaces\IBookFile.cs" />
@@ -58,7 +69,8 @@
     <Compile Include="Interfaces\IEntity.cs" />
     <Compile Include="Plugin\DescriptionAttribute.cs" />
     <Compile Include="Plugin\DisplayNameAttribute.cs" />
-    <Compile Include="Plugin\SupportedFormatPlugin.cs" />
+    <Compile Include="Plugin\Metadata.cs" />
+    <Compile Include="Plugin\SupportedFormatPluginWrapper.cs" />
     <Compile Include="Plugin\ISupportedFormatPlugin.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\IPublisher.cs" />

@@ -1,20 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Bookie.Common.Entities;
+using Bookie.Common.EventArgs;
 
 namespace Bookie.Core.Interfaces
 {
     public interface IBookCore
     {
-        ObservableCollection<Common.Entities.Book> GetAllBooks();
+        ObservableCollection<Book> GetAllBooks();
 
-        ObservableCollection<Common.Entities.Book> GetAllBooksFromRepository();
+        ObservableCollection<Book> GetAllBooksFromRepository();
 
-        void Persist(Common.Entities.Book book);
+        void Persist(Book book);
 
-        bool Exists(Common.Entities.Book book);
+        int Exists(Book book);
 
-        Common.Entities.Book GetBookById(int id);
+        Book GetBookById(int id);
 
-        List<Common.Entities.Book> GetBookByTitle(string title);
+        List<Book> GetBookByTitle(string title);
+
+        void BooksChanged(BookEventArgs args);
     }
 }

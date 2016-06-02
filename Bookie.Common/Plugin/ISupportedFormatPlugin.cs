@@ -1,11 +1,14 @@
-﻿namespace Bookie.Common.Plugin
+﻿using System.Drawing;
+
+namespace Bookie.Common.Plugin
 {
     public interface ISupportedFormatPlugin
     {
         string Format { get; set; }
+        string FileExtension { get; set; }
 
-        string Activate();
+        Image ExtractCover(string inputPath);
 
-        void ExtractCover(string filePath);
+        Metadata ExtractMetadata(string inputPath);
     }
 }

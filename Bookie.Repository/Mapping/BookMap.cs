@@ -17,7 +17,7 @@ namespace Bookie.Repository.Mapping
             Map(c => c.ModifiedDateTime);
             Map(c => c.Pages);
             Map(c => c.Rating);
-            HasOne(x => x.CoverImage);
+            HasOne(x => x.CoverImage).Cascade.All();
             HasManyToMany(x => x.Authors).Cascade.All().Table("BookAuthors");
             HasManyToMany(x => x.Publishers).Cascade.All().Table("BookPublishers");
             HasMany(x => x.BookFiles).Cascade.All();

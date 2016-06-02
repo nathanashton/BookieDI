@@ -106,13 +106,13 @@ namespace Bookie.Format.Mobi.Metadata
         public class RecordInfo
         {
             private readonly byte[] _recordDataOffset = new byte[4];
-            private byte _recordAttributes;
+            public byte RecordAttributes { get; }
             private readonly byte[] _uniqueId = new byte[3];
 
             public RecordInfo(FileStream fs)
             {
                 fs.Read(_recordDataOffset, 0, _recordDataOffset.Length);
-                _recordAttributes = (byte)fs.ReadByte();
+                RecordAttributes = (byte)fs.ReadByte();
                 fs.Read(_uniqueId, 0, _uniqueId.Length);
             }
 

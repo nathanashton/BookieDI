@@ -7,8 +7,9 @@
         Title="MainWindow" Height="350" Width="525">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <Button Content="Add Books" Command="{Binding AddBooksCommand}" />
+            <Button Content="BooksChanged Books" Command="{Binding AddBooksCommand}" />
             <Button Content="Get Books" Command="{Binding GetBooksCommand}" />
+            <Button Content="Tile View" Command="{Binding TileViewCommand}" />
         </StackPanel>
         <DataGrid ItemsSource="{Binding Books}" />
     </DockPanel>

@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Empty Database|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Empty Database\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;EMPTYDATABASE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ghostscript.NET, Version=1.2.0.0, Culture=neutral, PublicKeyToken=f85051de34525b59, processorArchitecture=MSIL">
       <HintPath>..\packages\Ghostscript.NET.1.2.0\lib\net40\Ghostscript.NET.dll</HintPath>

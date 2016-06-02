@@ -18,9 +18,24 @@ namespace Bookie
             var container = Resolver.Bootstrap();
             container.RegisterType<MainWindow>();
             container.RegisterType<MainWindowViewModel>();
-            var log = container.Resolve<ILog>();
+            container.RegisterType<BooksView>();
+            container.RegisterType<BooksViewViewModel>();
+
             var settings = container.Resolve<ISettings>();
+#if EMPTYDATABASE
+            if (Directory.Exists(settings.ApplicationPath))
+            {
+                try
+                {
+                    Directory.Delete(settings.ApplicationPath, true);
+                }
+                catch (Exception)
+                {
+                }
+            }
+#endif
             var plugins = container.Resolve<ISupportedFormats>();
+            var log = container.Resolve<ILog>();
             RunApplication(container, log, settings, plugins);
         }
 

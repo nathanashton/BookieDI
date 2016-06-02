@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bookie.Common.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,17 +7,17 @@ namespace Bookie.Format.Mobi.Metadata
 {
     public class BaseHeader
     {
-        protected SortedDictionary<string, object> fieldList = new SortedDictionary<string, object>();
-        protected SortedDictionary<string, object> fieldListNoBlankRows = new SortedDictionary<string, object>();
-        protected SortedDictionary<string, object> emptyFieldList = new SortedDictionary<string, object>(); //Used to get properties for a blank record
+        private readonly SortedDictionary<string, object> _fieldList = new SortedDictionary<string, object>();
+        private readonly SortedDictionary<string, object> _fieldListNoBlankRows = new SortedDictionary<string, object>();
+        private readonly SortedDictionary<string, object> _emptyFieldList = new SortedDictionary<string, object>(); //Used to get properties for a blank record
 
         private readonly List<string> _fieldListExclude = new List<string>() { "FieldList", "FieldListNoBlankRows", "EmptyFieldList", "EXTHHeader" };
 
-        public SortedDictionary<string, object> FieldList => fieldList;
+        public SortedDictionary<string, object> FieldList => _fieldList;
 
-        public SortedDictionary<string, object> FieldListNoBlankRows => fieldListNoBlankRows;
+        public SortedDictionary<string, object> FieldListNoBlankRows => _fieldListNoBlankRows;
 
-        public SortedDictionary<string, object> EmptyFieldList => emptyFieldList;
+        public SortedDictionary<string, object> EmptyFieldList => _emptyFieldList;
 
         public override string ToString()
         {
@@ -29,14 +30,14 @@ namespace Bookie.Format.Mobi.Metadata
 
             if (showBlankRows)
             {
-                foreach (KeyValuePair<string, object> kp in fieldList)
+                foreach (KeyValuePair<string, object> kp in _fieldList)
                 {
                     sb.AppendLine($"{kp.Key}: {kp.Value}");
                 }
             }
             else
             {
-                foreach (KeyValuePair<string, object> kp in fieldListNoBlankRows)
+                foreach (KeyValuePair<string, object> kp in _fieldListNoBlankRows)
                 {
                     sb.AppendLine($"{kp.Key}: {kp.Value}");
                 }
@@ -52,22 +53,29 @@ namespace Bookie.Format.Mobi.Metadata
 
         protected void PopulateFieldList(bool blankOnly)
         {
-            fieldList.Clear();
-            emptyFieldList.Clear();
-            foreach (System.Reflection.PropertyInfo propinfo in GetType().GetProperties())
+            try
             {
-                if (_fieldListExclude.Contains(propinfo.Name) == false)
+                _fieldList.Clear();
+                _emptyFieldList.Clear();
+                foreach (System.Reflection.PropertyInfo propinfo in GetType().GetProperties())
                 {
-                    if (!blankOnly)
+                    if (_fieldListExclude.Contains(propinfo.Name) == false)
                     {
-                        fieldList.Add(propinfo.Name, propinfo.GetValue(this, null));
-                        if (propinfo.GetValue(this, null).ToString() != String.Empty)
+                        if (!blankOnly)
                         {
-                            fieldListNoBlankRows.Add(propinfo.Name, propinfo.GetValue(this, null));
+                            _fieldList.Add(propinfo.Name, propinfo.GetValue(this, null));
+                            if (propinfo.GetValue(this, null).ToString() != String.Empty)
+                            {
+                                _fieldListNoBlankRows.Add(propinfo.Name, propinfo.GetValue(this, null));
+                            }
                         }
+                        _emptyFieldList.Add(propinfo.Name, null);
                     }
-                    emptyFieldList.Add(propinfo.Name, null);
                 }
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new BookieException("Known issue with Mobi");
             }
         }
     }

@@ -11,7 +11,7 @@ namespace Bookie.Core.SupportedFormatPlugins
 {
     public class SupportedFormats : ISupportedFormats
     {
-        public ObservableCollection<SupportedFormatPlugin> LoadedPlugins { get; set; }
+        public ObservableCollection<SupportedFormatPluginWrapper> LoadedPlugins { get; set; }
 
         private readonly ILog _log;
 
@@ -36,6 +36,7 @@ namespace Bookie.Core.SupportedFormatPlugins
                 }
                 catch (Exception)
                 {
+                    //TODO
                 }
             }
 
@@ -62,7 +63,7 @@ namespace Bookie.Core.SupportedFormatPlugins
                 }
             }
 
-            LoadedPlugins = new ObservableCollection<SupportedFormatPlugin>();
+            LoadedPlugins = new ObservableCollection<SupportedFormatPluginWrapper>();
 
             foreach (var type in pluginTypes)
             {
@@ -70,7 +71,7 @@ namespace Bookie.Core.SupportedFormatPlugins
                 var name = type.GetCustomAttributes(typeof(DisplayNameAttribute), false)[0].ToString();
                 var description = type.GetCustomAttributes(typeof(DescriptionAttribute), false)[0].ToString();
 
-                var wrappedPlugin = new SupportedFormatPlugin(plugin as ISupportedFormatPlugin, name, description);
+                var wrappedPlugin = new SupportedFormatPluginWrapper(plugin as ISupportedFormatPlugin, name, description);
                 LoadedPlugins.Add(wrappedPlugin);
                 _log.Info($"Loaded Supported Format Plugin : {name} : {type.FullName}");
             }

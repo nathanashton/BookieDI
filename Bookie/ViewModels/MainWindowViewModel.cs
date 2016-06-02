@@ -1,7 +1,8 @@
 ﻿using Bookie.Common.Entities;
-using Bookie.Common.Interfaces;
 using Bookie.Core.Interfaces;
 using Bookie.Helpers;
+using Bookie.Views;
+using Microsoft.Practices.Unity;
 using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -13,16 +14,11 @@ namespace Bookie.ViewModels
     {
         private readonly IBookCore _bookCore;
         private readonly IImporter _importer;
-        private readonly ISupportedFormats _plugins;
 
-        private readonly ILog _log;
-
-        public MainWindowViewModel(IBookCore bookCore, ILog log, IImporter importer, ISupportedFormats plugins)
+        public MainWindowViewModel(IBookCore bookCore, IImporter importer)
         {
-            _plugins = plugins;
             _bookCore = bookCore;
             _importer = importer;
-            _log = log;
             Books = _bookCore.GetAllBooksFromRepository();
         }
 
@@ -33,6 +29,11 @@ namespace Bookie.ViewModels
             get { return new RelayCommand(Get, x => true); }
         }
 
+        public ICommand TileViewCommand
+        {
+            get { return new RelayCommand(TileView, x => true); }
+        }
+
         public ICommand AddBooksCommand
         {
             get { return new RelayCommand(AddBook, x => true); }
@@ -41,19 +42,18 @@ namespace Bookie.ViewModels
         private void Get(object obj)
         {
             Books = _bookCore.GetAllBooksFromRepository();
-            LoadPlugins();
         }
 
         private void AddBook(object obj)
         {
-            _importer.StartScan(@"C:\temp\books\", false);
+            _importer.StartScan(@"C:\temp\books", false);
         }
 
-        private void LoadPlugins()
+        private void TileView(object obj)
         {
-            var all = _plugins.LoadedPlugins;
-
-            all[1].Plugin.ExtractCover(@"C:\temp\books\php.pdf");
+            var container = DependencyResolver.Resolver.Bootstrap();
+            var view = container.Resolve<BooksView>();
+            view.Show();
         }
     }
 }

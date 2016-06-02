@@ -1,6 +1,7 @@
 ﻿using Bookie.Common;
 using Bookie.Common.Interfaces;
 using Bookie.Core;
+using Bookie.Core.AuthorCore;
 using Bookie.Core.BookCore;
 using Bookie.Core.BookFileCore;
 using Bookie.Core.Interfaces;
@@ -24,11 +25,13 @@ namespace Bookie.DependencyResolver
             Container.RegisterType<IDatabase, Database>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IBookRepository, BookRepository>();
             Container.RegisterType<IBookFileRepository, BookFileRepository>();
+            Container.RegisterType<IAuthorRepository, AuthorRepository>();
 
             Container.RegisterType<IImporter, Importer>();
 
             Container.RegisterType<ISupportedFormats, SupportedFormats>(new ContainerControlledLifetimeManager());
 
+            Container.RegisterType<IAuthorCore, AuthorCore>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IBookCore, BookCore>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IBookFileCore, BookFileCore>(new ContainerControlledLifetimeManager());
 

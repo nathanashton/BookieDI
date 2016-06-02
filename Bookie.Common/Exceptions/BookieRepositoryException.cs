@@ -1,5 +1,4 @@
-﻿using Bookie.Common.Interfaces;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace Bookie.Common.Exceptions
@@ -9,7 +8,7 @@ namespace Bookie.Common.Exceptions
     {
         //private readonly ILog _log;
 
-        public BookieRepositoryException(ILog log)
+        public BookieRepositoryException()
         {
             //_log = log;
         }

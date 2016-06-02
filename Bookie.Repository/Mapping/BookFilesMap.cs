@@ -8,7 +8,6 @@ namespace Bookie.Repository.Mapping
         public BookFilesMap()
         {
             Id(c => c.Id);
-            Map(c => c.FileSize);
             Map(c => c.FullPathAndFileName);
             Map(c => c.ModifiedDateTime);
             References(x => x.Book);
