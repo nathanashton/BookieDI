@@ -1,9 +1,12 @@
 ﻿using Bookie.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using PropertyChanged;
 
 namespace Bookie.Common.Entities
 {
+    [ImplementPropertyChanged]
+
     public class Publisher : IPublisher
     {
         public virtual int Id { get; set; }

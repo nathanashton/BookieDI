@@ -2,6 +2,8 @@
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Bookie.Common.Entities
 {
@@ -23,6 +25,7 @@ namespace Bookie.Common.Entities
         public virtual ISet<BookFile> BookFiles { get; set; } = new HashSet<BookFile>();
         public virtual ISet<Author> Authors { get; set; } = new HashSet<Author>();
         public virtual ISet<Publisher> Publishers { get; set; } = new HashSet<Publisher>();
+        
 
         public virtual void AddAuthor(Author author)
         {
@@ -46,6 +49,11 @@ namespace Bookie.Common.Entities
         {
             cover.Book = this;
             CoverImage = cover;
+        }
+
+        public override string ToString()
+        {
+            return Title;
         }
     }
 }

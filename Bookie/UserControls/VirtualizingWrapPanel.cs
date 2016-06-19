@@ -2,16 +2,17 @@
 // ReSharper disable PossibleUnintendedReferenceComparison
 // ReSharper disable ArrangeRedundantParentheses
 // ReSharper disable PossibleLossOfFraction
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+
 namespace Bookie.UserControls
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
-    using System.Windows.Media;
-
     // class from: https://github.com/samueldjack/VirtualCollection/blob/master/VirtualCollection/VirtualCollection/VirtualizingWrapPanel.cs
     // MakeVisible() method from: http://www.switchonthecode.com/tutorials/wpf-tutorial-implementing-iscrollinfo
     public class VirtualizingWrapPanel : VirtualizingPanel, IScrollInfo
@@ -49,19 +50,19 @@ namespace Bookie.UserControls
         {
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                Dispatcher.BeginInvoke((Action)Initialize);
+                Dispatcher.BeginInvoke((Action) Initialize);
             }
         }
 
         public double ItemHeight
         {
-            get { return (double)GetValue(ItemHeightProperty); }
+            get { return (double) GetValue(ItemHeightProperty); }
             set { SetValue(ItemHeightProperty, value); }
         }
 
         public double ItemWidth
         {
-            get { return (double)GetValue(ItemWidthProperty); }
+            get { return (double) GetValue(ItemWidthProperty); }
             set { SetValue(ItemWidthProperty, value); }
         }
 
@@ -107,22 +108,22 @@ namespace Bookie.UserControls
 
         public void MouseWheelUp()
         {
-            SetVerticalOffset(VerticalOffset - ScrollLineAmount * SystemParameters.WheelScrollLines);
+            SetVerticalOffset(VerticalOffset - ScrollLineAmount*SystemParameters.WheelScrollLines);
         }
 
         public void MouseWheelDown()
         {
-            SetVerticalOffset(VerticalOffset + ScrollLineAmount * SystemParameters.WheelScrollLines);
+            SetVerticalOffset(VerticalOffset + ScrollLineAmount*SystemParameters.WheelScrollLines);
         }
 
         public void MouseWheelLeft()
         {
-            SetHorizontalOffset(HorizontalOffset - ScrollLineAmount * SystemParameters.WheelScrollLines);
+            SetHorizontalOffset(HorizontalOffset - ScrollLineAmount*SystemParameters.WheelScrollLines);
         }
 
         public void MouseWheelRight()
         {
-            SetHorizontalOffset(HorizontalOffset + ScrollLineAmount * SystemParameters.WheelScrollLines);
+            SetHorizontalOffset(HorizontalOffset + ScrollLineAmount*SystemParameters.WheelScrollLines);
         }
 
         public void SetHorizontalOffset(double offset)
@@ -198,7 +199,7 @@ namespace Bookie.UserControls
 
         private static int GetVirtualItemIndex(DependencyObject obj)
         {
-            return (int)obj.GetValue(VirtualItemIndexProperty);
+            return (int) obj.GetValue(VirtualItemIndexProperty);
         }
 
         private static void SetVirtualItemIndex(DependencyObject obj, int value)
@@ -209,7 +210,7 @@ namespace Bookie.UserControls
         private void Initialize()
         {
             _itemsControl = ItemsControl.GetItemsOwner(this);
-            _itemsGenerator = (IRecyclingItemContainerGenerator)ItemContainerGenerator;
+            _itemsGenerator = (IRecyclingItemContainerGenerator) ItemContainerGenerator;
 
             InvalidateMeasure();
         }
@@ -260,7 +261,7 @@ namespace Bookie.UserControls
                 {
                     bool newlyRealized;
 
-                    var child = (UIElement)_itemsGenerator.GenerateNext(out newlyRealized);
+                    var child = (UIElement) _itemsGenerator.GenerateNext(out newlyRealized);
                     SetVirtualItemIndex(child, itemIndex);
 
                     if (newlyRealized)
@@ -300,7 +301,7 @@ namespace Bookie.UserControls
 
                     _childLayouts.Add(child, new Rect(currentX, currentY, ItemWidth, ItemHeight));
 
-                    if (currentX + ItemWidth * 2 >= availableSize.Width)
+                    if (currentX + ItemWidth*2 >= availableSize.Width)
                     {
                         // wrap to a new line
                         currentY += ItemHeight;
@@ -397,17 +398,17 @@ namespace Bookie.UserControls
             // navigates up, the ListBox selects the previous item, and the scrolls that into view - and this triggers the loading of the rest of the items
             // in that row
 
-            var firstVisibleLine = (int)Math.Floor(VerticalOffset / itemHeight);
+            var firstVisibleLine = (int) Math.Floor(VerticalOffset/itemHeight);
 
-            var firstRealizedIndex = Math.Max(extentInfo.ItemsPerLine * firstVisibleLine - 1, 0);
-            var firstRealizedItemLeft = firstRealizedIndex % extentInfo.ItemsPerLine * ItemWidth - HorizontalOffset;
-            var firstRealizedItemTop = (firstRealizedIndex / extentInfo.ItemsPerLine) * itemHeight - VerticalOffset;
+            var firstRealizedIndex = Math.Max(extentInfo.ItemsPerLine*firstVisibleLine - 1, 0);
+            var firstRealizedItemLeft = firstRealizedIndex%extentInfo.ItemsPerLine*ItemWidth - HorizontalOffset;
+            var firstRealizedItemTop = (firstRealizedIndex/extentInfo.ItemsPerLine)*itemHeight - VerticalOffset;
 
             var firstCompleteLineTop = (firstVisibleLine == 0 ? firstRealizedItemTop : firstRealizedItemTop + ItemHeight);
-            var completeRealizedLines = (int)Math.Ceiling((availableSize.Height - firstCompleteLineTop) / itemHeight);
+            var completeRealizedLines = (int) Math.Ceiling((availableSize.Height - firstCompleteLineTop)/itemHeight);
 
             var lastRealizedIndex = Math.Min(
-                firstRealizedIndex + completeRealizedLines * extentInfo.ItemsPerLine + 2,
+                firstRealizedIndex + completeRealizedLines*extentInfo.ItemsPerLine + 2,
                 _itemsControl.Items.Count - 1);
 
             return new ItemLayoutInfo
@@ -426,9 +427,9 @@ namespace Bookie.UserControls
                 return new ExtentInfo();
             }
 
-            var itemsPerLine = Math.Max((int)Math.Floor(viewPortSize.Width / ItemWidth), 1);
-            var totalLines = (int)Math.Ceiling((double)_itemsControl.Items.Count / itemsPerLine);
-            var extentHeight = Math.Max(totalLines * ItemHeight, viewPortSize.Height);
+            var itemsPerLine = Math.Max((int) Math.Floor(viewPortSize.Width/ItemWidth), 1);
+            var totalLines = (int) Math.Ceiling((double) _itemsControl.Items.Count/itemsPerLine);
+            var extentHeight = Math.Max(totalLines*ItemHeight, viewPortSize.Height);
 
             return new ExtentInfo
             {

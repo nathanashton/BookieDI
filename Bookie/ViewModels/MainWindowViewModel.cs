@@ -1,10 +1,12 @@
-﻿using Bookie.Common.Entities;
-using Bookie.Core.Interfaces;
+﻿using Bookie.Core.Interfaces;
 using Bookie.Helpers;
-using Bookie.Views;
-using Microsoft.Practices.Unity;
+using Bookie.UserControls.Authors;
+using Bookie.UserControls.Books;
+using Ookii.Dialogs.Wpf;
 using PropertyChanged;
-using System.Collections.ObjectModel;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Bookie.ViewModels
@@ -12,48 +14,87 @@ namespace Bookie.ViewModels
     [ImplementPropertyChanged]
     public class MainWindowViewModel
     {
+        private readonly AuthorsControl _authorControl;
+        private readonly BooksControl _bookControl;
         private readonly IBookCore _bookCore;
         private readonly IImporter _importer;
+        private readonly ISupportedFormats _supportedFormats;
 
-        public MainWindowViewModel(IBookCore bookCore, IImporter importer)
+        public MainWindowViewModel(IBookCore bookCore, IImporter importer, BooksControl bookControl,
+            AuthorsControl authorscontol, ISupportedFormats supportedFormats)
         {
+            _authorControl = authorscontol;
+            _supportedFormats = supportedFormats;
+            _bookControl = bookControl;
             _bookCore = bookCore;
             _importer = importer;
-            Books = _bookCore.GetAllBooksFromRepository();
+            View = bookControl;
         }
 
-        public ObservableCollection<Book> Books { get; set; }
+        public ContentControl View { get; set; }
 
-        public ICommand GetBooksCommand
+        public string Time { get; set; }
+
+        public ICommand AddFilesCommand
         {
-            get { return new RelayCommand(Get, x => true); }
+            get { return new RelayCommand(AddFiles, x => true); }
         }
 
-        public ICommand TileViewCommand
+        public ICommand AddFromFolderCommand
         {
-            get { return new RelayCommand(TileView, x => true); }
+            get { return new RelayCommand(AddFromFolder, x => true); }
         }
 
-        public ICommand AddBooksCommand
+        public ICommand BooksCommand
         {
-            get { return new RelayCommand(AddBook, x => true); }
+            get { return new RelayCommand(BookView, x => true); }
         }
 
-        private void Get(object obj)
+        public ICommand AuthorsCommand
         {
-            Books = _bookCore.GetAllBooksFromRepository();
+            get { return new RelayCommand(AuthorView, x => true); }
         }
 
-        private void AddBook(object obj)
+        private void BookView(object obj)
         {
-            _importer.StartScan(@"C:\temp\books", false);
+            View = _bookControl;
         }
 
-        private void TileView(object obj)
+        private void AuthorView(object obj)
         {
-            var container = DependencyResolver.Resolver.Bootstrap();
-            var view = container.Resolve<BooksView>();
-            view.Show();
+            View = _authorControl;
+        }
+
+        private void AddFromFolder(object obj)
+        {
+            var dialog = new VistaFolderBrowserDialog
+            {
+                Description = "Select a Folder",
+                UseDescriptionForTitle = true
+            };
+            if (dialog.ShowDialog() != true) return;
+            var msg = MessageBox.Show("Scan Sub-Folders?", "Scan", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            _importer.AddFromFolder(dialog.SelectedPath, msg == MessageBoxResult.Yes);
+        }
+
+        private void AddFiles(object obj)
+        {
+            var supportedFormatsString = new StringBuilder();
+
+            for (var index = 0; index < _supportedFormats.LoadedPlugins.Count; index++)
+            {
+                var file = _supportedFormats.LoadedPlugins[index];
+                supportedFormatsString.Append($"*{file.Plugin.FileExtension}");
+                if (index != _supportedFormats.LoadedPlugins.Count - 1)
+                {
+                    supportedFormatsString.Append(";");
+                }
+            }
+            var filter = $"Supported Formats ({supportedFormatsString})|{supportedFormatsString}";
+            var openFileDialog = new VistaOpenFileDialog { Filter = filter };
+            if (openFileDialog.ShowDialog() != true) return;
+            var files = openFileDialog.FileNames;
+            _importer.AddBooks(files);
         }
     }
 }

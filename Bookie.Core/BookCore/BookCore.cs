@@ -1,5 +1,7 @@
-﻿using Bookie.Common;
+﻿using System;
+using Bookie.Common;
 using Bookie.Common.Entities;
+using Bookie.Common.EventArgs;
 using Bookie.Common.Interfaces;
 using Bookie.Core.Interfaces;
 using Bookie.Repository.Interfaces;
@@ -7,7 +9,7 @@ using PropertyChanged;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Bookie.Common.EventArgs;
+using System.Windows.Threading;
 
 namespace Bookie.Core.BookCore
 {
@@ -19,29 +21,44 @@ namespace Bookie.Core.BookCore
         private readonly IAuthorCore _authorCore;
         private readonly ILog _log;
 
+        public event EventHandler<BookEventArgs> BookChanged;
+
         private ObservableCollection<Book> _books;
 
         public BookCore(IBookRepository bookRepository, IBookFileCore bookFileCore, ILog log, IAuthorCore authorCore)
         {
             _authorCore = authorCore;
             _bookRepository = bookRepository;
+            _bookRepository.BookChanged += _bookRepository_BookChanged;
+
             _bookFileCore = bookFileCore;
             _log = log;
             _log.Debug(MethodName.Get());
             _books = new ObservableCollection<Book>();
         }
 
+        private void _bookRepository_BookChanged(object sender, BookEventArgs e)
+        {
+            if (BookChanged != null)
+            {
+                BookChanged(this, e);
+            }
+        }
+
         public ObservableCollection<Book> GetAllBooks()
         {
             _log.Debug(MethodName.Get());
-            return _books ?? (_books = new ObservableCollection<Book>(_bookRepository.GetAll()));
+            if (_books == null)
+            {
+                return new ObservableCollection<Book>(_bookRepository.GetAll());
+            }
+            return _books;
         }
 
         public ObservableCollection<Book> GetAllBooksFromRepository()
         {
             _log.Debug(MethodName.Get());
-            _books = new ObservableCollection<Book>(_bookRepository.GetAll());
-            return _books;
+            return new ObservableCollection<Book>(_bookRepository.GetAll());
         }
 
         public void Persist(Book book)
@@ -64,20 +81,7 @@ namespace Bookie.Core.BookCore
                 }
             }
 
-            // TODO This breaks as we are adding to the collection from a different thread
-            //var existing = _books.FirstOrDefault(x => x == book);
-            //if (existing != null)
-            //{
-            //    _books.Remove(existing);
-            //    _books.BooksChanged(book);
-            //}
-            //else
-            //{
-            //    _books.BooksChanged(book);
-            //}
-
             _bookRepository.Persist(book);
-
             _log.Info("Persisted : " + book.Title);
         }
 
@@ -107,12 +111,5 @@ namespace Bookie.Core.BookCore
             return _bookRepository.GetByTitle(title);
         }
 
-        public void BooksChanged(BookEventArgs args)
-        {
-            if (args.State == BookEventArgs.BookState.Added)
-            {
-                _books.Add(args.Book);
-            }
-        }
     }
 }

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
 using Bookie.Common.Entities;
 using Bookie.Common.EventArgs;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Bookie.Core.Interfaces
 {
@@ -19,6 +20,8 @@ namespace Bookie.Core.Interfaces
 
         List<Book> GetBookByTitle(string title);
 
-        void BooksChanged(BookEventArgs args);
+        event EventHandler<BookEventArgs> BookChanged;
+
+
     }
 }

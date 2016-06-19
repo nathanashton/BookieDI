@@ -1,4 +1,4 @@
-﻿namespace Bookie.UserControls
+﻿namespace Bookie.UserControls.Books
 {
     public partial class BookTiles
     {

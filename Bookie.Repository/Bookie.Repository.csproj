@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersistentObservableGenericSet.cs" />
     <Compile Include="Repositories\BookFileRepository.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Interfaces\IDatabase.cs" />

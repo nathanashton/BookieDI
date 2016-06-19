@@ -39,11 +39,18 @@ namespace Bookie.Core
             }
         }
 
-        public void StartScan(string path, bool includeSubDirectories, string searchPattern = "*.*")
+        public void AddBooks(string[] filePaths)
+        {
+            _allFiles = filePaths;
+            _log.Info($"Found {_allFiles.Length} files to import");
+            Worker.RunWorkerAsync();
+        }
+
+        public void AddFromFolder(string path, bool includeSubDirectories, string searchPattern = "*.*")
         {
             _log.Info($"Scanning {path} for {searchPattern} - Include Subdirectories: {includeSubDirectories}");
             _allFiles = Directory.GetFiles(path, searchPattern, includeSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
-            _log.Info($"Found {_allFiles.Count()} files to import");
+            _log.Info($"Found {_allFiles.Length} files to import");
             Worker.RunWorkerAsync();
         }
 
@@ -54,7 +61,7 @@ namespace Bookie.Core
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             var book = e.UserState as Book;
-            _bookCore.BooksChanged(new Common.EventArgs.BookEventArgs {Book = book, State = Common.EventArgs.BookEventArgs.BookState.Added});
+          //  _bookCore.BooksChanged(new Common.EventArgs.BookEventArgs { Book = book, State = Common.EventArgs.BookEventArgs.BookState.Added });
 
             //ProgressArgs.OperationName = "Testing";
             //ProgressArgs.ProgressBarText = "Testing " + e.ProgressPercentage + "%";
@@ -65,7 +72,7 @@ namespace Bookie.Core
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (var i = 0; i < _allFiles.Count(); i++)
+            for (var i = 0; i < _allFiles.Length; i++)
             {
                 if (Worker.CancellationPending)
                 {
@@ -124,6 +131,7 @@ namespace Bookie.Core
                     continue;
                 }
 
+                book.Rating = 5;
                 book.AddBookFile(bookfile);
                 _bookCore.Persist(book);
 

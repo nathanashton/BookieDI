@@ -1,13 +1,12 @@
-﻿using static System.String;
+﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Windows.Data;
+using System.Windows.Media.Imaging;
+using static System.String;
 
 namespace Bookie.Converters
 {
-    using System;
-    using System.Globalization;
-    using System.IO;
-    using System.Windows.Data;
-    using System.Windows.Media.Imaging;
-
     public class CoverImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

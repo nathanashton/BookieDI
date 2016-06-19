@@ -1,14 +1,18 @@
-﻿using Bookie.Common.Entities;
+﻿using System;
+using Bookie.Common.Entities;
 using Bookie.Repository.Interfaces;
 using NHibernate.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using Bookie.Common.EventArgs;
 
 namespace Bookie.Repository.Repositories
 {
     public class BookRepository : IBookRepository
     {
         private readonly IDatabase _database;
+
+        public event EventHandler<BookEventArgs> BookChanged;
 
         public BookRepository(IDatabase database)
         {
@@ -67,7 +71,9 @@ namespace Bookie.Repository.Repositories
                     transaction.Commit();
                 }
             }
+            OnBookChanged(book, BookEventArgs.BookState.Updated);
         }
+
 
         public void Remove(Book book)
         {
@@ -79,6 +85,11 @@ namespace Bookie.Repository.Repositories
                     transaction.Commit();
                 }
             }
+        }
+
+        public void OnBookChanged(Book book, BookEventArgs.BookState bookState)
+        {
+            BookChanged?.Invoke(this, new BookEventArgs { Book = book, State = bookState });
         }
     }
 }

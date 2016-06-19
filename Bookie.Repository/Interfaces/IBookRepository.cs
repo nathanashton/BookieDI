@@ -1,5 +1,7 @@
-﻿using Bookie.Common.Entities;
+﻿using System;
+using Bookie.Common.Entities;
 using System.Collections.Generic;
+using Bookie.Common.EventArgs;
 
 namespace Bookie.Repository.Interfaces
 {
@@ -14,5 +16,7 @@ namespace Bookie.Repository.Interfaces
         void Persist(Book book);
 
         void Remove(Book book);
+
+        event EventHandler<BookEventArgs> BookChanged;
     }
 }

@@ -64,10 +64,16 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>.\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=1.50.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.1.50.4\lib\dotnet\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Syncfusion.Data.WPF, Version=14.1450.0.41, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=14.1450.0.41, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Shared.WPF, Version=14.1450.0.41, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
@@ -85,11 +91,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="UserControls\BookTiles.xaml">
+    <Compile Include="ViewModels\SelectAuthorsWindowViewModel.cs" />
+    <Compile Include="Views\SelectAuthorWindow.xaml.cs">
+      <DependentUpon>SelectAuthorWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UserControls\Authors\AuthorList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Authors\AuthorsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Books\BookList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Books\BooksControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Books\BookTiles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\BooksView.xaml">
+    <Page Include="Views\AuthorDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BookDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,21 +132,49 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\CoverImageConverter.cs" />
+    <Compile Include="Converters\EmptyCollectionVisibilityConverter.cs" />
+    <Compile Include="Converters\SingleLineTextConverter.cs" />
+    <Compile Include="Converters\StarRatingConverter.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Converters\IListItemConverter.cs" />
+    <Compile Include="Helpers\MultiSelectorBehaviours.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="UserControls\BookTiles.xaml.cs">
+    <Compile Include="Helpers\TwoListSynchronizer.cs" />
+    <Compile Include="UserControls\Authors\AuthorList.xaml.cs">
+      <DependentUpon>AuthorList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Authors\AuthorsControl.xaml.cs">
+      <DependentUpon>AuthorsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Books\BookList.xaml.cs">
+      <DependentUpon>BookList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Books\BooksControl.xaml.cs">
+      <DependentUpon>BooksControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Books\BookTiles.xaml.cs">
       <DependentUpon>BookTiles.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\VirtualizingWrapPanel.cs" />
-    <Compile Include="ViewModels\BooksViewViewModel.cs" />
+    <Compile Include="ViewModels\AuthorDetailsWindowViewModel.cs" />
+    <Compile Include="ViewModels\AuthorsControlViewModel.cs" />
+    <Compile Include="ViewModels\BookDetailsWindowViewModel.cs" />
+    <Compile Include="ViewModels\BooksControlViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Views\BooksView.xaml.cs">
-      <DependentUpon>BooksView.xaml</DependentUpon>
+    <Compile Include="Views\AuthorDetailsWindow.xaml.cs">
+      <DependentUpon>AuthorDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BookDetailsWindow.xaml.cs">
+      <DependentUpon>BookDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SelectAuthorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -163,7 +221,24 @@
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\author.png" />
+    <Resource Include="Resources\Icons\book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\tag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\list.png" />
+    <Resource Include="Resources\Icons\tiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tiledbackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\padlock_closed.png" />
+    <Resource Include="Resources\Icons\padlock_open.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.2\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

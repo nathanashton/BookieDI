@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="Bookie.UserControls.Books.BookList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <!--<UserControl.Resources>
+        <converters:SingleLineTextConverter x:Key="SingleLineTextConverter" />
+        <converters:StarRatingConverter x:Key="StarRatingConverter" />
+    </UserControl.Resources>
+    <DataGrid AutoGenerateColumns="False" RowHeaderWidth="0" IsReadOnly="True" AlternationCount="2" AlternatingRowBackground="Gray" GridLinesVisibility="Horizontal" RowBackground="#575757" VerticalGridLinesBrush="#B6B6B6" HorizontalGridLinesBrush="Black" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook, Mode=TwoWay}" helpers:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedBooks, Mode=TwoWay}" SelectionMode="Extended">
+        <DataGrid.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0E0E4C" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Black" />
+        </DataGrid.Resources>
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Details" Command="{Binding BookDetailsCommand}" />
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Width="Auto" Header="Title">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Padding="5" Foreground="#F2F2F2" Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="*" Header="Abstract">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Padding="5" Foreground="#F2F2F2" Text="{Binding Abstract, Converter={StaticResource SingleLineTextConverter}}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="Auto" Header="Published">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Padding="5"  Foreground="#F2F2F2"  Text="{Binding DatePublished,StringFormat='{}{0:MMM yy}'}" TextTrimming="CharacterEllipsis" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="Auto" Header="Pages">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Padding="5"  Foreground="#F2F2F2"  Text="{Binding Pages}" TextTrimming="CharacterEllipsis" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="Auto" Header="Isbn10">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Padding="5"  Foreground="#F2F2F2"  Text="{Binding Isbn10}" TextTrimming="CharacterEllipsis" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="Auto" Header="Isbn13">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock  Padding="5"  Foreground="#F2F2F2"  Text="{Binding Isbn13}" TextTrimming="CharacterEllipsis" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="Auto" Header="Favourite">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock  Padding="5"  Foreground="#F2F2F2" Text="{Binding Favourite}" TextTrimming="CharacterEllipsis" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="Auto" Header="Rating">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Padding="5" FontFamily="Segoe MDL2 Assets" Foreground="Yellow" Text="{Binding Rating, Converter={StaticResource StarRatingConverter}}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>-->
+    <syncfusion:SfDataGrid ItemsSource="{Binding Books}" />
+</UserControl>

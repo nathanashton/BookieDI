@@ -60,6 +60,7 @@
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\BookFile.cs" />
     <Compile Include="Entities\CoverImage.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="EventArgs\BookEventArgs.cs" />
     <Compile Include="Exceptions\BookieException.cs" />
     <Compile Include="Exceptions\BookieRepositoryException.cs" />

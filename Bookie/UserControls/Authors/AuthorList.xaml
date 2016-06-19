@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Bookie.UserControls.Authors.AuthorList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <!--<DataGrid ItemsSource="{Binding Authors}" SelectedItem="{Binding SelectedAuthor, Mode=TwoWay}" helpers:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedAuthors, Mode=TwoWay}" SelectionMode="Extended">
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Details" Command="{Binding AuthorDetailsCommand}" />
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+    </DataGrid>-->
+    <syncfusion:SfDataGrid ItemsSource="{Binding Authors}" />
+</UserControl>

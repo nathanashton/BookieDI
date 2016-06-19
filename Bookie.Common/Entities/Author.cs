@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using PropertyChanged;
 
 namespace Bookie.Common.Entities
 {
+    [ImplementPropertyChanged]
     public class Author : IAuthor
     {
         public virtual int Id { get; set; }
@@ -18,10 +21,26 @@ namespace Bookie.Common.Entities
         [NotMapped]
         public virtual string FullName => LastName + ", " + FirstName;
 
+        [NotMapped]
+        public string BooksToString
+        {
+            get
+            {
+                var b = Books.ToList();
+                var p = string.Join<Book>(",", b.ToArray());
+                return p;
+            }
+        }
+
         public virtual void AddBook(Book book)
         {
             book.Authors.Add(this);
             Books.Add(book);
+        }
+
+        public override string ToString()
+        {
+            return FullName;
         }
     }
 }

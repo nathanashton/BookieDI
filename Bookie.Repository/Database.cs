@@ -1,10 +1,13 @@
-﻿using Bookie.Common.Interfaces;
+﻿using Bookie.Common.Entities;
+using Bookie.Common.Interfaces;
 using Bookie.Repository.Interfaces;
 using Bookie.Repository.Mapping;
+using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.PropertyChanged;
 using NHibernate.Tool.hbm2ddl;
 
 namespace Bookie.Repository
@@ -23,11 +26,16 @@ namespace Bookie.Repository
 
         public ISessionFactory CreateSessionFactory()
         {
+
+
+
             return Fluently.Configure()
                 .Database(SQLiteConfiguration.Standard.ConnectionString(@"data source=" + _settings.DatabasePath + ";"))
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<BookMap>())
                 .ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
+
+
         }
 
         public void BuildSchema(Configuration config)

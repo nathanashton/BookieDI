@@ -2,9 +2,12 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
+using PropertyChanged;
 
 namespace Bookie.Common.Entities
 {
+    [ImplementPropertyChanged]
+
     public class BookFile : IBookFile
     {
         public virtual int Id { get; set; }
@@ -44,6 +47,11 @@ namespace Bookie.Common.Entities
         {
             book.BookFiles.Add(this);
             Book = book;
+        }
+
+        public override string ToString()
+        {
+            return FullPathAndFileName;
         }
     }
 }

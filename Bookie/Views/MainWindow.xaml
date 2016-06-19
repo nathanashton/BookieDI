@@ -5,12 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <Button Content="BooksChanged Books" Command="{Binding AddBooksCommand}" />
-            <Button Content="Get Books" Command="{Binding GetBooksCommand}" />
-            <Button Content="Tile View" Command="{Binding TileViewCommand}" />
-        </StackPanel>
-        <DataGrid ItemsSource="{Binding Books}" />
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Add Book" />
+                <MenuItem Header="Add Book From File/s" Command="{Binding AddFilesCommand}" />
+                <MenuItem Header="Add Books From Folder" Command="{Binding AddFromFolderCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <WrapPanel Grid.Row="0" Height="65" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <WrapPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFECECEC" Offset="0" />
+                        <GradientStop Color="LightGray" Offset="1" />
+                    </LinearGradientBrush>
+                </WrapPanel.Background>
+                <Button Margin="5" BorderThickness="0" Background="Transparent" Width="45" Command="{Binding BooksCommand}">
+                    <StackPanel Orientation="Vertical">
+                        <Image Width="35" Source="pack://application:,,,/Resources/Icons/book.png" />
+                        <TextBlock FontSize="12" HorizontalAlignment="Center" Text="Books" />
+                    </StackPanel>
+                </Button>
+                
+                <Button Margin="5" BorderThickness="0" Background="Transparent" Width="45" Command="{Binding AuthorsCommand}">
+                    <StackPanel Orientation="Vertical">
+                        <Image Width="35" Source="pack://application:,,,/Resources/Icons/author.png" />
+                        <TextBlock FontSize="12" HorizontalAlignment="Center" Text="Authors" />
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+            <Separator Margin="0" Background="#C5C5C5" Grid.Row="1" />
+            <Separator Margin="0" Background="#B1B1B1" Grid.Row="2" />
+        </Grid>
+
+        <Border DockPanel.Dock="Bottom" VerticalAlignment="Bottom" BorderBrush="#BEBEBE" BorderThickness="0,1,0,0">
+            <StatusBar Background="#D3D3D3" Height="25">
+                <DockPanel
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StatusBar}}}"
+                    LastChildFill="True">
+                    <Label DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="0"
+                           Content="{Binding Time}" />
+                </DockPanel>
+            </StatusBar>
+        </Border>
+
+        <DockPanel>
+            <Grid DockPanel.Dock="Left" Width="200" Background="#232B2D" />
+            <Border BorderBrush="#505050" BorderThickness="1,0,0,0">
+                <ContentControl Content="{Binding View}" />
+            </Border>
+        </DockPanel>
     </DockPanel>
 </Window>

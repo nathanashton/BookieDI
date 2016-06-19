@@ -4,6 +4,8 @@
     {
         void ProgressCancel();
 
-        void StartScan(string path, bool includeSubdirectories, string searchPattern = "*.*");
+        void AddBooks(string[] filePaths);
+
+        void AddFromFolder(string path, bool includeSubdirectories, string searchPattern = "*.*");
     }
 }

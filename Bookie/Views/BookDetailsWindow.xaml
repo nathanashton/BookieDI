@@ -1,0 +1,112 @@
+﻿<Window x:Class="Bookie.Views.BookDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Topmost="True"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:Bookie.Converters"
+        ResizeMode="NoResize"
+        mc:Ignorable="d" Closing="Window_Closing" WindowStartupLocation="CenterScreen"
+        Title="{Binding Book.Title}" Height="444.459" Width="830">
+    <Window.Resources>
+        <converters:CoverImageConverter x:Key="CoverImageConverter" />
+        <converters:StarRatingConverter x:Key="StarRatingConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolVisConverter" />
+    </Window.Resources>
+
+    <DockPanel>
+        <Border Background="#F0F0F0" BorderBrush="#D9D9D9" BorderThickness="0,1,0,0"
+                HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Margin="5" Width="73" Height="23" Content="Save" Command="{Binding SaveCommand}"
+                        Click="Button_Click" />
+                <Button Margin="5" Width="73" Height="23" Content="Cancel" Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Border>
+
+        <DockPanel DockPanel.Dock="Left">
+            <Border Width="250" Margin="5" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="1">
+                <Image Stretch="Fill"
+                       Source="{Binding Book.CoverImage.FullPathAndFileName, Converter={StaticResource CoverImageConverter}}" >
+                    <Image.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Change"/>
+                            <MenuItem Header="Remove" Command="{Binding RemoveCoverCommand}"/>
+                        </ContextMenu>
+                    </Image.ContextMenu>
+                </Image>
+            </Border>
+        </DockPanel>
+
+        <TabControl Margin="5" DockPanel.Dock="Right">
+            <TabItem Header="Details">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Margin="3" Grid.Row="0" Content="Title:" Grid.Column="0" />
+                    <TextBox Margin="3"  Grid.Row="0" VerticalContentAlignment="Center" Grid.Column="1" Name="BookTitle" TextWrapping="Wrap" Text="{Binding Book.Title, UpdateSourceTrigger=Explicit}" />
+
+                    <Label Margin="3" Grid.Row="1" Content="Published:" Grid.Column="0" />
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="0.5*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Margin="3" Content="Pages:" Grid.Column="1" />
+                        <TextBox Margin="3" Grid.Column="0" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Book.DatePublished, UpdateSourceTrigger=Explicit}" />
+                        <TextBox Margin="3" Grid.Column="2"  VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Book.Pages, UpdateSourceTrigger=Explicit}" />
+                    </Grid>
+
+                    <Label Margin="3" Grid.Row="3" Content="ISBN10:" Grid.Column="0" />
+                    <TextBox Margin="3" Grid.Row="3" VerticalContentAlignment="Center" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Book.Isbn10, UpdateSourceTrigger=Explicit}" />
+
+                    <Label Margin="3" Grid.Row="4" Content="ISBN13:" Grid.Column="0" />
+                    <TextBox Margin="3" Grid.Row="4" VerticalContentAlignment="Center" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Book.Isbn13, UpdateSourceTrigger=Explicit}" />
+
+                    <Label Margin="3" Grid.Row="5" Content="Rating:" Grid.Column="0" />
+                    <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="3" FontSize="14" Content="{Binding Book.Rating, Converter={StaticResource StarRatingConverter}}"
+                       FontFamily="Segoe MDL2 Assets" Foreground="Yellow">
+                        <Label.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="1" ShadowDepth="1" />
+                        </Label.Effect>
+                    </Label>
+
+                    <Label Content="Abstract:" Margin="3" Grid.Row="6" Grid.Column="0" />
+                    <TextBox Grid.Row="6" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="165" Margin="3" Name="BookAbstract" TextWrapping="Wrap" Text="{Binding Book.Abstract}" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Authors">
+                <DockPanel>
+                    <Button Content="Refresh" Click="Button_Click_1"/>
+                    <ListBox ItemsSource="{Binding Book.Authors}" SelectedItem="{Binding SelectedAuthor, Mode=TwoWay}" >
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Remove" Command="{Binding RemoveAuthorCommand}"/>
+                                <MenuItem Header="Add Author" Command="{Binding AddAuthorCommand}"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                    </ListBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Publishers" />
+            <TabItem Header="Files">
+                <ListBox ItemsSource="{Binding Book.BookFiles}" />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

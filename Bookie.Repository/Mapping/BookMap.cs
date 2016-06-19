@@ -1,4 +1,5 @@
-﻿using Bookie.Common.Entities;
+﻿using System.Collections.Generic;
+using Bookie.Common.Entities;
 using FluentNHibernate.Mapping;
 
 namespace Bookie.Repository.Mapping
