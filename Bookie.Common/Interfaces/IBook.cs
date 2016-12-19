@@ -1,7 +1,6 @@
 ﻿using Bookie.Common.Entities;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Bookie.Common.Interfaces
 {
@@ -16,8 +15,8 @@ namespace Bookie.Common.Interfaces
         bool Favourite { get; set; }
         int Rating { get; set; }
         CoverImage CoverImage { get; set; }
-        ISet<BookFile> BookFiles { get; set; }
-        ISet<Author> Authors { get; set; }
-        ISet<Publisher> Publishers { get; set; }
+        ICollection<BookFile> BookFiles { get; set; }
+        ICollection<Author> Authors { get; set; }
+        ICollection<Publisher> Publishers { get; set; }
     }
 }

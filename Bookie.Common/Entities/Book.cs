@@ -3,7 +3,6 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace Bookie.Common.Entities
 {
@@ -22,34 +21,9 @@ namespace Bookie.Common.Entities
         public virtual DateTime? ModifiedDateTime { get; set; }
 
         public virtual CoverImage CoverImage { get; set; }
-        public virtual ISet<BookFile> BookFiles { get; set; } = new HashSet<BookFile>();
-        public virtual ISet<Author> Authors { get; set; } = new HashSet<Author>();
-        public virtual ISet<Publisher> Publishers { get; set; } = new HashSet<Publisher>();
-        
-
-        public virtual void AddAuthor(Author author)
-        {
-            author.Books.Add(this);
-            Authors.Add(author);
-        }
-
-        public virtual void AddPublisher(Publisher publisher)
-        {
-            publisher.Books.Add(this);
-            Publishers.Add(publisher);
-        }
-
-        public virtual void AddBookFile(BookFile bookFile)
-        {
-            bookFile.Book = this;
-            BookFiles.Add(bookFile);
-        }
-
-        public virtual void AddCoverImage(CoverImage cover)
-        {
-            cover.Book = this;
-            CoverImage = cover;
-        }
+        public virtual ICollection<BookFile> BookFiles { get; set; } = new ObservableCollection<BookFile>();
+        public virtual ICollection<Author> Authors { get; set; } = new ObservableCollection<Author>();
+        public virtual ICollection<Publisher> Publishers { get; set; } = new ObservableCollection<Publisher>();
 
         public override string ToString()
         {

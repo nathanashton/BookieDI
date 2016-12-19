@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -7,23 +6,23 @@ namespace Bookie.Format.Mobi.Metadata
 {
     public class PdbHead : BaseHeader
     {
-        private readonly byte[] _name = new byte[32];
+        private readonly byte[] _appInfoId = new byte[4];
 
         private readonly byte[] _attributes = new byte[2];
-        private readonly byte[] _version = new byte[2];
         private readonly byte[] _creationDate = new byte[4];
-        private readonly byte[] _modificationDate = new byte[4];
-        private readonly byte[] _lastBackupDate = new byte[4];
-        private readonly byte[] _modificationNumber = new byte[4];
-        private readonly byte[] _appInfoId = new byte[4];
-        private readonly byte[] _sortInfoId = new byte[4];
-        private readonly byte[] _type = new byte[4];
         private readonly byte[] _creator = new byte[4];
-        private readonly byte[] _uniqueIdSeed = new byte[4];
+        private readonly byte[] _gapToData = new byte[2];
+        private readonly byte[] _lastBackupDate = new byte[4];
+        private readonly byte[] _modificationDate = new byte[4];
+        private readonly byte[] _modificationNumber = new byte[4];
+        private readonly byte[] _name = new byte[32];
         private readonly byte[] _nextRecordListId = new byte[4];
         private readonly byte[] _numRecords = new byte[2];
         private readonly List<RecordInfo> _recordInfoList = new List<RecordInfo>();
-        private readonly byte[] _gapToData = new byte[2];
+        private readonly byte[] _sortInfoId = new byte[4];
+        private readonly byte[] _type = new byte[4];
+        private readonly byte[] _uniqueIdSeed = new byte[4];
+        private readonly byte[] _version = new byte[2];
 
         public PdbHead()
         {
@@ -50,7 +49,7 @@ namespace Bookie.Format.Mobi.Metadata
 
             int recordCount = Converter.ToInt16(_numRecords);
 
-            for (int i = 0; i < recordCount; i++)
+            for (var i = 0; i < recordCount; i++)
             {
                 _recordInfoList.Add(new RecordInfo(fs));
             }
@@ -60,7 +59,7 @@ namespace Bookie.Format.Mobi.Metadata
             PopulateFieldList();
         }
 
-        public string Name => Encoding.ASCII.GetString(_name).Replace("\0", String.Empty);
+        public string Name => Encoding.ASCII.GetString(_name).Replace("\0", string.Empty);
 
         public ushort Attributes => Converter.ToUInt16(_attributes);
 
@@ -96,17 +95,13 @@ namespace Bookie.Format.Mobi.Metadata
                 {
                     return _recordInfoList[1].RecordDataOffset - _recordInfoList[0].RecordDataOffset;
                 }
-                else
-                {
-                    return 0;
-                }
+                return 0;
             }
         }
 
         public class RecordInfo
         {
             private readonly byte[] _recordDataOffset = new byte[4];
-            public byte RecordAttributes { get; }
             private readonly byte[] _uniqueId = new byte[3];
 
             public RecordInfo(FileStream fs)
@@ -115,6 +110,8 @@ namespace Bookie.Format.Mobi.Metadata
                 RecordAttributes = (byte)fs.ReadByte();
                 fs.Read(_uniqueId, 0, _uniqueId.Length);
             }
+
+            public byte RecordAttributes { get; }
 
             public uint RecordDataOffset => Converter.ToUInt32(_recordDataOffset);
         }

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Bookie.ViewModels;
+using System.ComponentModel;
 using System.Windows;
-using Bookie.ViewModels;
 
 namespace Bookie.Views
 {

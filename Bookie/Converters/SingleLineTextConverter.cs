@@ -13,7 +13,7 @@ namespace Bookie.Converters
             {
                 return "";
             }
-            var s = (string) value;
+            var s = (string)value;
             if (s.Contains("Jane Eyre"))
             {
                 s = Regex.Replace(s, @"\r\n?|\n", " ");

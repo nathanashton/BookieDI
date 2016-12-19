@@ -1,23 +1,18 @@
-﻿using System.Collections.ObjectModel;
-using Bookie.Common.Entities;
+﻿using Bookie.Common.Entities;
 using Bookie.Core.Interfaces;
+using Bookie.Helpers;
 using PropertyChanged;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using Bookie.Helpers;
 
 namespace Bookie.ViewModels
 {
     [ImplementPropertyChanged]
     public class SelectAuthorsWindowViewModel
     {
-        public ObservableCollection<Author> Authors { get; set; }
-        public ObservableCollection<Author> FilteredAuthors { get; set; }
-        public Author SelectedAuthor { get; set; }
-        public Book Book { get; set; }
-        public string Filter { get; set; }
-        private IAuthorCore _authorCore;
-        private IBookCore _bookCore;
+        private readonly IAuthorCore _authorCore;
+        private readonly IBookCore _bookCore;
 
         public SelectAuthorsWindowViewModel(IAuthorCore authorCore, IBookCore bookcore)
         {
@@ -26,23 +21,27 @@ namespace Bookie.ViewModels
             GetAuthors();
         }
 
-        public void GetAuthors()
-        {
-            Authors = new ObservableCollection<Author>(_authorCore.GetAllAuthors().OrderBy(x => x.LastName));
-            FilteredAuthors = Authors;
-        }
+        public ObservableCollection<Author> Authors { get; set; }
+        public ObservableCollection<Author> FilteredAuthors { get; set; }
+        public Author SelectedAuthor { get; set; }
+        public Book Book { get; set; }
+        public string Filter { get; set; }
 
         public ICommand ChooseAuthorCommand
         {
             get { return new RelayCommand(ChooseAuthor, x => SelectedAuthor != null); }
         }
 
-        private void ChooseAuthor(object obj)
+        public void GetAuthors()
         {
-            SelectedAuthor.AddBook(Book);
-            Book.AddAuthor(SelectedAuthor);
-            _bookCore.Persist(Book);
+            Authors = new ObservableCollection<Author>(_authorCore.GetAllAuthors().OrderBy(x => x.LastName));
+            FilteredAuthors = Authors;
         }
 
+        private void ChooseAuthor(object obj)
+        {
+            Book.Authors.Add(SelectedAuthor);
+            _bookCore.Persist(Book);
+        }
     }
 }

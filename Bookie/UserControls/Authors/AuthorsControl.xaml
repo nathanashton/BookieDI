@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <DockPanel.Background>
@@ -13,13 +13,11 @@
                     <GradientStop Color="#FFB7BBCA" Offset="1" />
                 </LinearGradientBrush>
             </DockPanel.Background>
-            <Button Margin="5" BorderThickness="0" Background="Transparent" Command="{Binding ListCommand}">
+            <Button HorizontalAlignment="Left" Margin="5" BorderThickness="0" Background="Transparent" Command="{Binding ListCommand}">
                 <Image Width="18" RenderOptions.BitmapScalingMode="Fant"
                        Source="pack://application:,,,/Resources/Icons/list.png" />
             </Button>
-            <Button Margin="5" BorderThickness="0" Width="18" Background="Yellow" Command="{Binding DebugCommand}">
-                <!--<Image Width="18" RenderOptions.BitmapScalingMode="Fant" Source="pack://application:,,,/Resources/Icons/list.png" />-->
-            </Button>
+      
         </DockPanel>
         <Grid Background="#636363" DockPanel.Dock="Bottom">
             <Grid.RowDefinitions>

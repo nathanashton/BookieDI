@@ -5,11 +5,11 @@ namespace Bookie.Format.Mobi.Metadata
     public class PalmDocHead : BaseHeader
     {
         private readonly byte[] _compression = new byte[2];
-        private readonly byte[] _unused0 = new byte[2];
-        private readonly byte[] _textLength = new byte[4];
+        private readonly byte[] _encryptionType = new byte[2];
         private readonly byte[] _recordCount = new byte[2];
         private readonly byte[] _recordSize = new byte[2];
-        private readonly byte[] _encryptionType = new byte[2];
+        private readonly byte[] _textLength = new byte[4];
+        private readonly byte[] _unused0 = new byte[2];
         private readonly byte[] _unused1 = new byte[2];
 
         public PalmDocHead()
@@ -40,9 +40,15 @@ namespace Bookie.Format.Mobi.Metadata
             {
                 switch (Compression)
                 {
-                    case 1: return "None";
-                    case 2: return "PalmDOC";
-                    case 17480: return "HUFF/CDIC";
+                    case 1:
+                        return "None";
+
+                    case 2:
+                        return "PalmDOC";
+
+                    case 17480:
+                        return "HUFF/CDIC";
+
                     default:
                         return $"Unknown {Compression}";
                 }
@@ -63,9 +69,15 @@ namespace Bookie.Format.Mobi.Metadata
             {
                 switch (EncryptionType)
                 {
-                    case 0: return "None";
-                    case 1: return "Old Mobipocket";
-                    case 2: return "Mobipocket";
+                    case 0:
+                        return "None";
+
+                    case 1:
+                        return "Old Mobipocket";
+
+                    case 2:
+                        return "Mobipocket";
+
                     default:
                         return $"Unknown {EncryptionType}";
                 }

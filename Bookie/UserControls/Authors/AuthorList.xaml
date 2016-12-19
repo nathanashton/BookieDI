@@ -13,5 +13,5 @@
             </ContextMenu>
         </DataGrid.ContextMenu>
     </DataGrid>-->
-    <syncfusion:SfDataGrid ItemsSource="{Binding Authors}" />
+    <syncfusion:SfDataGrid ItemsSource="{Binding Authors}" ColumnSizer="Auto" />
 </UserControl>

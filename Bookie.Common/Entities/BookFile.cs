@@ -1,13 +1,12 @@
 ﻿using Bookie.Common.Interfaces;
+using PropertyChanged;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
-using PropertyChanged;
 
 namespace Bookie.Common.Entities
 {
     [ImplementPropertyChanged]
-
     public class BookFile : IBookFile
     {
         public virtual int Id { get; set; }

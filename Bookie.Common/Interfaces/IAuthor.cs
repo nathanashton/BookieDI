@@ -9,6 +9,6 @@ namespace Bookie.Common.Interfaces
         string LastName { get; set; }
         string Biography { get; set; }
         string FullName { get; }
-        ISet<Book> Books { get; set; }
+        ICollection<Book> Books { get; set; }
     }
 }

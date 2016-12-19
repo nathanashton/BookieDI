@@ -5,7 +5,6 @@ using Bookie.UserControls.Authors;
 using Bookie.Views;
 using PropertyChanged;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -23,6 +22,7 @@ namespace Bookie.ViewModels
             _authorCore = authorCore;
             SelectedAuthors = new ObservableCollection<Author>();
             SetAuthorList(null);
+            GetAll(null);
         }
 
         public ObservableCollection<Author> Authors { get; set; }
@@ -56,7 +56,7 @@ namespace Bookie.ViewModels
             Authors = _authorCore.GetAllAuthors();
         }
 
-        private void GetAll(object obj)
+        public void GetAll(object obj)
         {
             Authors = _authorCore.GetAllAuthors();
         }

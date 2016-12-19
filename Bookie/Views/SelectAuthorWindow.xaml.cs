@@ -1,51 +1,55 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using Bookie.Common.Entities;
 using Bookie.ViewModels;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using Bookie.Common.Entities;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Bookie.Views
 {
     /// <summary>
-    /// Interaction logic for SelectAuthorWindow.xaml
+    ///     Interaction logic for SelectAuthorWindow.xaml
     /// </summary>
-    public partial class SelectAuthorWindow : Window
+    public partial class SelectAuthorWindow
     {
-
-        public SelectAuthorsWindowViewModel ViewModel { get; set; }
-        public bool CloseAllowed { get; set; }
-
-
         public SelectAuthorWindow(SelectAuthorsWindowViewModel viewmodel)
         {
             InitializeComponent();
             ViewModel = viewmodel;
             DataContext = viewmodel;
             Closing += SelectAuthorWindow_Closing;
-            Loaded += SelectAuthorWindow_Loaded;
+            IsVisibleChanged += SelectAuthorWindow_IsVisibleChanged;
         }
 
-        private void SelectAuthorWindow_Loaded(object sender, RoutedEventArgs e)
+        private void SelectAuthorWindow_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             ViewModel.GetAuthors();
+            ViewModel.Filter = string.Empty;
+            FilterBox.Focus();
         }
 
-        private void SelectAuthorWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        public SelectAuthorsWindowViewModel ViewModel { get; set; }
+        public bool CloseAllowed { get; set; }
+
+        
+        private void SelectAuthorWindow_Closing(object sender, CancelEventArgs e)
         {
             if (CloseAllowed) return;
             Visibility = Visibility.Hidden;
             e.Cancel = true;
         }
 
-        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ViewModel.FilteredAuthors = new ObservableCollection<Author>(ViewModel.Authors.Where(x => x.FullName.ToLower().Contains(ViewModel.Filter.ToLower())));
+            ViewModel.FilteredAuthors =
+                new ObservableCollection<Author>(
+                    ViewModel.Authors.Where(x => x.FullName.ToLower().Contains(ViewModel.Filter.ToLower())));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //DialogResult = true;
-            //Close();
+            Close();
         }
     }
 }

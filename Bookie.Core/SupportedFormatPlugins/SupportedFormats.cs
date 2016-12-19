@@ -11,8 +11,6 @@ namespace Bookie.Core.SupportedFormatPlugins
 {
     public class SupportedFormats : ISupportedFormats
     {
-        public ObservableCollection<SupportedFormatPluginWrapper> LoadedPlugins { get; set; }
-
         private readonly ILog _log;
 
         public SupportedFormats(ILog log)
@@ -20,10 +18,13 @@ namespace Bookie.Core.SupportedFormatPlugins
             _log = log;
         }
 
+        public ObservableCollection<SupportedFormatPluginWrapper> LoadedPlugins { get; set; }
+
         public void LoadFromPath(string path, bool includeSubdirectories = false)
         {
             if (!Directory.Exists(path)) return;
-            var dllFileNames = Directory.GetFiles(path, "*.dll", includeSubdirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+            var dllFileNames = Directory.GetFiles(path, "*.dll",
+                includeSubdirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
 
             ICollection<Assembly> assemblies = new List<Assembly>(dllFileNames.Length);
             foreach (var dllFile in dllFileNames)

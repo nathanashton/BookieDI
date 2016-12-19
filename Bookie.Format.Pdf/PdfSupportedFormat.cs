@@ -35,11 +35,6 @@ namespace Bookie.Format.Pdf
         public string Format { get; set; }
         public string FileExtension { get; set; }
 
-        public string Activate()
-        {
-            return "Activate";
-        }
-
         public Image ExtractCover(string inputPath)
         {
             try
@@ -107,6 +102,11 @@ namespace Bookie.Format.Pdf
             {
                 throw new BookieException($"Error extracting metadata for {inputPath}", ex);
             }
+        }
+
+        public string Activate()
+        {
+            return "Activate";
         }
 
         private string ExtractIsbn(string url)

@@ -1,5 +1,5 @@
-﻿using System;
-using Bookie.Common.Entities;
+﻿using Bookie.Common.Entities;
+using Bookie.Common.EventArgs;
 using Bookie.Core.Interfaces;
 using Bookie.Helpers;
 using Bookie.UserControls.Books;
@@ -10,16 +10,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
-using Bookie.Common.EventArgs;
 
 namespace Bookie.ViewModels
 {
     [ImplementPropertyChanged]
     public class BooksControlViewModel
     {
-        private readonly BookDetailsWindow _bookDetailsWindow;
         private readonly IBookCore _bookCore;
+        private readonly BookDetailsWindow _bookDetailsWindow;
 
         public BooksControlViewModel(IBookCore bookcore, BookDetailsWindow bookDetailsWindow)
         {
@@ -30,29 +28,7 @@ namespace Bookie.ViewModels
             _bookCore.BookChanged += _bookCore_BookChanged;
             SelectedBooks = new ObservableCollection<Book>();
             SetBookTiles(null);
-        }
-
-        private void _bookCore_BookChanged(object sender, Common.EventArgs.BookEventArgs e)
-        {
-            if (e.State != BookEventArgs.BookState.Updated) return;
-            var existing = Books.FirstOrDefault(x => x.Id == e.Book.Id);
-            if (existing == null)
-            {
-                Application.Current.Dispatcher.Invoke(delegate
-                {
-                    Books.Add(e.Book);
-                    Books = new ObservableCollection<Book>(Books.OrderBy(x => x.Title).ToList());
-                });
-            }
-            else
-            {
-                Application.Current.Dispatcher.Invoke(delegate
-                {
-                    Books.Remove(existing);
-                    Books.Add(e.Book);
-                    Books = new ObservableCollection<Book>(Books.OrderBy(x => x.Title).ToList());
-                });
-            }
+            GetAllBooks(null);
         }
 
         public BookTiles BookTiles { get; set; }
@@ -85,6 +61,19 @@ namespace Bookie.ViewModels
         public ICommand GetAllBooksCommand
         {
             get { return new RelayCommand(GetAllBooks, x => true); }
+        }
+
+        private void _bookCore_BookChanged(object sender, BookEventArgs e)
+        {
+            var existing = Books.FirstOrDefault(x => x.Id == e.Book.Id);
+            if (existing == null)
+            {
+                Application.Current.Dispatcher.Invoke(() => Books.Add(e.Book));
+            }
+            else
+            {
+                Application.Current.Dispatcher.Invoke(() => existing = e.Book);
+            }
         }
 
         private void SetBookTiles(object obj)

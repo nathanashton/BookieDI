@@ -6,6 +6,12 @@ namespace Bookie.Common.Plugin
 {
     public class Metadata
     {
+        public Metadata()
+        {
+            Authors = new List<Author>();
+            Publishers = new List<Publisher>();
+        }
+
         public string Title { get; set; }
         public string Abstract { get; set; }
         public string Asin { get; set; }
@@ -15,11 +21,5 @@ namespace Bookie.Common.Plugin
         public List<Author> Authors { get; set; }
         public List<Publisher> Publishers { get; set; }
         public int? PageCount { get; set; }
-
-        public Metadata()
-        {
-            Authors = new List<Author>();
-            Publishers = new List<Publisher>();
-        }
     }
 }

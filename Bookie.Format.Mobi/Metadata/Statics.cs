@@ -38,7 +38,7 @@ namespace Bookie.Format.Mobi.Metadata
         private static byte[] CheckBytes(byte[] bytesToCheck)
         {
             //Make copy so we're not permanently reversing the order of the bytes in the actual field
-            byte[] buffer = (byte[])bytesToCheck.Clone();
+            var buffer = (byte[])bytesToCheck.Clone();
 
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(buffer);

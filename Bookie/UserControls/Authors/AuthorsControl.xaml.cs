@@ -15,5 +15,10 @@ namespace Bookie.UserControls.Authors
             _controlViewModel = authorsControlViewModel;
             DataContext = _controlViewModel;
         }
+
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _controlViewModel.GetAll(null);
+        }
     }
 }

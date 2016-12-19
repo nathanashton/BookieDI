@@ -10,7 +10,6 @@
     <Window.Resources>
         <converters:CoverImageConverter x:Key="CoverImageConverter" />
         <converters:StarRatingConverter x:Key="StarRatingConverter" />
-        <BooleanToVisibilityConverter x:Key="BoolVisConverter" />
     </Window.Resources>
 
     <DockPanel>
@@ -26,11 +25,11 @@
         <DockPanel DockPanel.Dock="Left">
             <Border Width="250" Margin="5" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="1">
                 <Image Stretch="Fill"
-                       Source="{Binding Book.CoverImage.FullPathAndFileName, Converter={StaticResource CoverImageConverter}}" >
+                       Source="{Binding Book.CoverImage.FullPathAndFileName, Converter={StaticResource CoverImageConverter}}">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Change"/>
-                            <MenuItem Header="Remove" Command="{Binding RemoveCoverCommand}"/>
+                            <MenuItem Header="Change" />
+                            <MenuItem Header="Remove" Command="{Binding RemoveCoverCommand}" />
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>
@@ -56,7 +55,8 @@
                     </Grid.RowDefinitions>
 
                     <Label Margin="3" Grid.Row="0" Content="Title:" Grid.Column="0" />
-                    <TextBox Margin="3"  Grid.Row="0" VerticalContentAlignment="Center" Grid.Column="1" Name="BookTitle" TextWrapping="Wrap" Text="{Binding Book.Title, UpdateSourceTrigger=Explicit}" />
+                    <TextBox Margin="3" Grid.Row="0" VerticalContentAlignment="Center" Grid.Column="1" Name="BookTitle"
+                             TextWrapping="Wrap" Text="{Binding Book.Title, UpdateSourceTrigger=Explicit}" />
 
                     <Label Margin="3" Grid.Row="1" Content="Published:" Grid.Column="0" />
 
@@ -68,36 +68,41 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Margin="3" Content="Pages:" Grid.Column="1" />
-                        <TextBox Margin="3" Grid.Column="0" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Book.DatePublished, UpdateSourceTrigger=Explicit}" />
-                        <TextBox Margin="3" Grid.Column="2"  VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Book.Pages, UpdateSourceTrigger=Explicit}" />
+                        <TextBox Margin="3" Grid.Column="0" VerticalContentAlignment="Center" TextWrapping="Wrap"
+                                 Text="{Binding Book.DatePublished, UpdateSourceTrigger=Explicit}" />
+                        <TextBox Margin="3" Grid.Column="2" VerticalContentAlignment="Center" TextWrapping="Wrap"
+                                 Text="{Binding Book.Pages, UpdateSourceTrigger=Explicit}" />
                     </Grid>
 
                     <Label Margin="3" Grid.Row="3" Content="ISBN10:" Grid.Column="0" />
-                    <TextBox Margin="3" Grid.Row="3" VerticalContentAlignment="Center" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Book.Isbn10, UpdateSourceTrigger=Explicit}" />
+                    <TextBox Margin="3" Grid.Row="3" VerticalContentAlignment="Center" Grid.Column="1"
+                             TextWrapping="Wrap" Text="{Binding Book.Isbn10, UpdateSourceTrigger=Explicit}" />
 
                     <Label Margin="3" Grid.Row="4" Content="ISBN13:" Grid.Column="0" />
-                    <TextBox Margin="3" Grid.Row="4" VerticalContentAlignment="Center" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Book.Isbn13, UpdateSourceTrigger=Explicit}" />
+                    <TextBox Margin="3" Grid.Row="4" VerticalContentAlignment="Center" Grid.Column="1"
+                             TextWrapping="Wrap" Text="{Binding Book.Isbn13, UpdateSourceTrigger=Explicit}" />
 
                     <Label Margin="3" Grid.Row="5" Content="Rating:" Grid.Column="0" />
-                    <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="3" FontSize="14" Content="{Binding Book.Rating, Converter={StaticResource StarRatingConverter}}"
-                       FontFamily="Segoe MDL2 Assets" Foreground="Yellow">
+                    <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="3" FontSize="14"
+                           Content="{Binding Book.Rating, Converter={StaticResource StarRatingConverter}}"
+                           FontFamily="Segoe MDL2 Assets" Foreground="Yellow">
                         <Label.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="1" ShadowDepth="1" />
                         </Label.Effect>
                     </Label>
 
                     <Label Content="Abstract:" Margin="3" Grid.Row="6" Grid.Column="0" />
-                    <TextBox Grid.Row="6" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="165" Margin="3" Name="BookAbstract" TextWrapping="Wrap" Text="{Binding Book.Abstract}" />
+                    <TextBox Grid.Row="6" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="165"
+                             Margin="3" Name="BookAbstract" TextWrapping="Wrap" Text="{Binding Book.Abstract}" />
                 </Grid>
             </TabItem>
             <TabItem Header="Authors">
                 <DockPanel>
-                    <Button Content="Refresh" Click="Button_Click_1"/>
-                    <ListBox ItemsSource="{Binding Book.Authors}" SelectedItem="{Binding SelectedAuthor, Mode=TwoWay}" >
+                    <ListBox ItemsSource="{Binding Book.Authors}" SelectedItem="{Binding SelectedAuthor, Mode=TwoWay}">
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Remove" Command="{Binding RemoveAuthorCommand}"/>
-                                <MenuItem Header="Add Author" Command="{Binding AddAuthorCommand}"/>
+                                <MenuItem Header="Remove" Command="{Binding RemoveAuthorCommand}" />
+                                <MenuItem Header="Add Author" Command="{Binding AddAuthorCommand}" />
                             </ContextMenu>
                         </ListBox.ContextMenu>
                     </ListBox>

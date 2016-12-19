@@ -21,7 +21,6 @@
                 <Image Width="18" RenderOptions.BitmapScalingMode="Fant"
                        Source="pack://application:,,,/Resources/Icons/list.png" />
             </Button>
-            <Button Content="Get" Command="{Binding GetAllBooksCommand}"/>
             <TextBlock VerticalAlignment="Center" Foreground="Black" TextAlignment="Right" DockPanel.Dock="Right"
                        Margin="0,0,10,0" Text="{Binding Books.Count, StringFormat={}{0} Books}" />
         </DockPanel>

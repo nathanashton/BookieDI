@@ -27,14 +27,16 @@
                         <GradientStop Color="LightGray" Offset="1" />
                     </LinearGradientBrush>
                 </WrapPanel.Background>
-                <Button Margin="5" BorderThickness="0" Background="Transparent" Width="45" Command="{Binding BooksCommand}">
+                <Button Margin="5" BorderThickness="0" Background="Transparent" Width="45"
+                        Command="{Binding BooksCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Width="35" Source="pack://application:,,,/Resources/Icons/book.png" />
                         <TextBlock FontSize="12" HorizontalAlignment="Center" Text="Books" />
                     </StackPanel>
                 </Button>
-                
-                <Button Margin="5" BorderThickness="0" Background="Transparent" Width="45" Command="{Binding AuthorsCommand}">
+
+                <Button Margin="5" BorderThickness="0" Background="Transparent" Width="45"
+                        Command="{Binding AuthorsCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Width="35" Source="pack://application:,,,/Resources/Icons/author.png" />
                         <TextBlock FontSize="12" HorizontalAlignment="Center" Text="Authors" />

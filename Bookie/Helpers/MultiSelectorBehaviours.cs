@@ -28,7 +28,7 @@ namespace Bookie.Helpers
         /// <returns>The list that is acting as the sync list.</returns>
         public static IList GetSynchronizedSelectedItems(DependencyObject dependencyObject)
         {
-            return (IList) dependencyObject.GetValue(SynchronizedSelectedItems);
+            return (IList)dependencyObject.GetValue(SynchronizedSelectedItems);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Bookie.Helpers
 
         private static SynchronizationManager GetSynchronizationManager(DependencyObject dependencyObject)
         {
-            return (SynchronizationManager) dependencyObject.GetValue(SynchronizationManagerProperty);
+            return (SynchronizationManager)dependencyObject.GetValue(SynchronizationManagerProperty);
         }
 
         private static void SetSynchronizationManager(DependencyObject dependencyObject, SynchronizationManager value)

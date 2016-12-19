@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Bookie.Converters;
+using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
-using Bookie.Converters;
 
 // ReSharper disable TryCastAlwaysSucceeds
 // ReSharper disable PossibleUnintendedReferenceComparison

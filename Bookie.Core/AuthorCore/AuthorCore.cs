@@ -1,50 +1,51 @@
 ﻿using Bookie.Common;
 using Bookie.Common.Entities;
+using Bookie.Common.EventArgs;
 using Bookie.Common.Interfaces;
 using Bookie.Core.Interfaces;
-using Bookie.Repository.Interfaces;
 using PropertyChanged;
+using System;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Linq;
 
 namespace Bookie.Core.AuthorCore
 {
     [ImplementPropertyChanged]
     public class AuthorCore : IAuthorCore
     {
-        private readonly IAuthorRepository _authorRepository;
         private readonly ILog _log;
-        private ObservableCollection<Author> _authors;
+        private readonly Ctx _ctx;
 
-        public AuthorCore(ILog log, IAuthorRepository authorRepository)
+        public AuthorCore(ILog log, Ctx ctx)
         {
-            _authorRepository = authorRepository;
             _log = log;
+            _ctx = ctx;
             _log.Debug(MethodName.Get());
-            _authors = new ObservableCollection<Author>();
         }
+
+        public event EventHandler<AuthorEventArgs> AuthorChanged;
 
         public ObservableCollection<Author> GetAllAuthors()
         {
             _log.Debug(MethodName.Get());
-            //if (_authors != null) return _authors;
-            //else
-            //{
-            return _authors = new ObservableCollection<Author>(_authorRepository.GetAll());
-            //  }
+            return new ObservableCollection<Author>(_ctx.Authors.ToList());
         }
 
         public int Persist(Author author)
         {
-            int id;
-            var existing = _authorRepository.Get(author.FirstName, author.LastName);
-            if (existing != null)
+            if (_ctx.Entry(author).State == EntityState.Detached)
             {
-                id = existing.Id;
-               // _authorRepository.Update(author);
-                return id;
+                _ctx.Authors.Add(author);
             }
-            id = _authorRepository.Persist(author);
-            return id;
+
+            _ctx.SaveChanges();
+            return 0;
+        }
+
+        private void OnAuthorChanged(AuthorEventArgs e)
+        {
+            AuthorChanged?.Invoke(this, e);
         }
     }
 }

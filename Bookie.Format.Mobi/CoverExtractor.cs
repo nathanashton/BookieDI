@@ -7,8 +7,8 @@ namespace Bookie.Format.Mobi
 {
     public class CoverExtractor
     {
-        private readonly Stream _stream;
         private readonly BinaryReader _reader;
+        private readonly Stream _stream;
 
         private CoverExtractor(Stream mobiFile)
         {
@@ -19,13 +19,14 @@ namespace Bookie.Format.Mobi
         public static Stream ExtractCover(Stream mobiFile)
         {
             if (!BitConverter.IsLittleEndian)
-                throw new InvalidOperationException("You should rewrite this code if you intend to use it on a big-endian machine");
+                throw new InvalidOperationException(
+                    "You should rewrite this code if you intend to use it on a big-endian machine");
 
             return new CoverExtractor(mobiFile).Extract();
         }
 
         /// <summary>
-        /// Extract the cover image from a MOBI stram
+        ///     Extract the cover image from a MOBI stram
         /// </summary>
         /// <returns>null if there's no cover image</returns>
         private Stream Extract()
@@ -92,7 +93,7 @@ namespace Bookie.Format.Mobi
         }
 
         /// <summary>
-        /// Gets the byte offset in the file of the PDB record at the given index.
+        ///     Gets the byte offset in the file of the PDB record at the given index.
         /// </summary>
         /// <param name="recordIndex">The record index</param>
         private long ReadPdbRecordOffset(uint recordIndex)
@@ -103,7 +104,7 @@ namespace Bookie.Format.Mobi
         }
 
         /// <summary>
-        /// Reads the given EXTH record value
+        ///     Reads the given EXTH record value
         /// </summary>
         /// <param name="exthHeaderOffset">Offset of the EXTH header</param>
         /// <param name="exthRecordType">Type of the record to read</param>
@@ -138,7 +139,7 @@ namespace Bookie.Format.Mobi
         }
 
         /// <summary>
-        /// Reads a byte, word or dword at the current position
+        ///     Reads a byte, word or dword at the current position
         /// </summary>
         /// <param name="bytes">Number of bytes to read</param>
         private uint ReadVariableLength(uint bytes)
@@ -162,7 +163,7 @@ namespace Bookie.Format.Mobi
         }
 
         /// <summary>
-        /// Reads a dword at the given offset
+        ///     Reads a dword at the given offset
         /// </summary>
         /// <param name="offset">Byte offset to read</param>
         private uint ReadUInt32(long offset)
@@ -172,7 +173,7 @@ namespace Bookie.Format.Mobi
         }
 
         /// <summary>
-        /// Reads a word at the current offset
+        ///     Reads a word at the current offset
         /// </summary>
         private ushort ReadUInt16()
         {
@@ -181,7 +182,7 @@ namespace Bookie.Format.Mobi
         }
 
         /// <summary>
-        /// Reads a dword at the current offset
+        ///     Reads a dword at the current offset
         /// </summary>
         private uint ReadUInt32()
         {
@@ -189,7 +190,7 @@ namespace Bookie.Format.Mobi
         }
 
         /// <summary>
-        /// Checks for a magic identifier at the given offset.
+        ///     Checks for a magic identifier at the given offset.
         /// </summary>
         /// <param name="offset">Byte offset to check</param>
         /// <param name="magicString">Expected ASCII string at the given offset</param>

@@ -1,6 +1,6 @@
-﻿using System;
-using Bookie.Common.Entities;
+﻿using Bookie.Common.Entities;
 using Bookie.Common.EventArgs;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -21,7 +21,5 @@ namespace Bookie.Core.Interfaces
         List<Book> GetBookByTitle(string title);
 
         event EventHandler<BookEventArgs> BookChanged;
-
-
     }
 }

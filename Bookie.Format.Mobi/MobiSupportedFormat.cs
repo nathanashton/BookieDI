@@ -15,14 +15,14 @@ namespace Bookie.Format.Mobi
     [Description("Provides support for the MOBI Format.")]
     public class MobiSupportedFormat : ISupportedFormatPlugin
     {
-        public string Format { get; set; }
-        public string FileExtension { get; set; }
-
         public MobiSupportedFormat()
         {
             Format = "MOBI Format";
             FileExtension = ".mobi";
         }
+
+        public string Format { get; set; }
+        public string FileExtension { get; set; }
 
         public Image ExtractCover(string inputPath)
         {
@@ -57,13 +57,12 @@ namespace Bookie.Format.Mobi
                             IsNullOrEmpty(meta.MobiHeader.ExthHeader.UpdatedTitle)
                                 ? Path.GetFileNameWithoutExtension(inputPath)
                                 : meta.MobiHeader.ExthHeader.UpdatedTitle,
-                       
                         Asin = meta.MobiHeader.ExthHeader.Asin,
                         Isbn = meta.MobiHeader.ExthHeader.Ibsn,
                         Subject = meta.MobiHeader.ExthHeader.Subject
                     };
 
-                  //  metadata.Title = Utils.CleanInput(metadata.Title);
+                    //  metadata.Title = Utils.CleanInput(metadata.Title);
 
                     DateTime publisheddate;
                     if (DateTime.TryParse(meta.MobiHeader.ExthHeader.PublishedDate, out publisheddate))

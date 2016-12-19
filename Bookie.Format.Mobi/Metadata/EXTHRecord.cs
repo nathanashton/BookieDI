@@ -4,9 +4,8 @@ namespace Bookie.Format.Mobi.Metadata
 {
     public class ExthRecord
     {
-        private readonly byte[] _recordType = new byte[4];
         private readonly byte[] _recordLength = new byte[4];
-        private readonly byte[] _recordData;
+        private readonly byte[] _recordType = new byte[4];
 
         public ExthRecord(FileStream fs)
         {
@@ -14,12 +13,12 @@ namespace Bookie.Format.Mobi.Metadata
             fs.Read(_recordLength, 0, _recordLength.Length);
 
             if (RecordLength < 8) throw new IOException("Invalid EXTH record length");
-            _recordData = new byte[RecordLength - 8];
-            fs.Read(_recordData, 0, _recordData.Length);
+            RecordData = new byte[RecordLength - 8];
+            fs.Read(RecordData, 0, RecordData.Length);
         }
 
         //Properties
-        public int DataLength => _recordData.Length;
+        public int DataLength => RecordData.Length;
 
         public int Size => DataLength + 8;
 
@@ -27,6 +26,6 @@ namespace Bookie.Format.Mobi.Metadata
 
         public uint RecordType => Converter.ToUInt32(_recordType);
 
-        public byte[] RecordData => _recordData;
+        public byte[] RecordData { get; }
     }
 }

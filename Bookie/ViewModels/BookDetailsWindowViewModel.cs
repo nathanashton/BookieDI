@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
-using Bookie.Common.Entities;
+﻿using Bookie.Common.Entities;
 using Bookie.Core.Interfaces;
 using Bookie.Helpers;
+using Bookie.Views;
 using PropertyChanged;
 using System.Windows.Input;
-using Bookie.Views;
 
 namespace Bookie.ViewModels
 {
@@ -12,18 +11,16 @@ namespace Bookie.ViewModels
     public class BookDetailsWindowViewModel
     {
         private readonly IBookCore _bookCore;
-        private readonly IAuthorCore _authorCore;
         private readonly SelectAuthorWindow _selectAuthorWindow;
 
-        public BookDetailsWindowViewModel(IBookCore bookcore, SelectAuthorWindow selectAuthorWindow, IAuthorCore authorcore)
+        public BookDetailsWindowViewModel(IBookCore bookcore, SelectAuthorWindow selectAuthorWindow)
         {
             _bookCore = bookcore;
-            _authorCore = authorcore;
             _selectAuthorWindow = selectAuthorWindow;
         }
 
         public Book Book { get; set; }
-        public Author SelectedAuthor { get; set;  }
+        public Author SelectedAuthor { get; set; }
 
         public bool EditMode { get; set; }
 
@@ -41,7 +38,7 @@ namespace Bookie.ViewModels
         {
             get { return new RelayCommand(AddAuthor, x => true); }
         }
-        
+
         public ICommand RemoveCoverCommand
         {
             get { return new RelayCommand(RemoveCover, x => true); }

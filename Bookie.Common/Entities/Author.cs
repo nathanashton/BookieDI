@@ -1,26 +1,16 @@
 ﻿using Bookie.Common.Interfaces;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using PropertyChanged;
 
 namespace Bookie.Common.Entities
 {
     [ImplementPropertyChanged]
     public class Author : IAuthor
     {
-        public virtual int Id { get; set; }
-        public virtual DateTime? ModifiedDateTime { get; set; }
-        public virtual string FirstName { get; set; }
-        public virtual string LastName { get; set; }
-        public virtual string Biography { get; set; }
-
-        public virtual ISet<Book> Books { get; set; } = new HashSet<Book>();
-
-        [NotMapped]
-        public virtual string FullName => LastName + ", " + FirstName;
-
         [NotMapped]
         public string BooksToString
         {
@@ -32,11 +22,16 @@ namespace Bookie.Common.Entities
             }
         }
 
-        public virtual void AddBook(Book book)
-        {
-            book.Authors.Add(this);
-            Books.Add(book);
-        }
+        public virtual int Id { get; set; }
+        public virtual DateTime? ModifiedDateTime { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual string LastName { get; set; }
+        public virtual string Biography { get; set; }
+
+        public virtual ICollection<Book> Books { get; set; } = new ObservableCollection<Book>();
+
+        [NotMapped]
+        public virtual string FullName => LastName + ", " + FirstName;
 
         public override string ToString()
         {

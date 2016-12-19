@@ -6,38 +6,37 @@ namespace Bookie.Format.Mobi.Metadata
 {
     public class MobiHead : BaseHeader
     {
-        private readonly byte[] _identifier = new byte[4];
-        private readonly byte[] _headerLength = new byte[4];
-        private readonly byte[] _mobiType = new byte[4];
-        private readonly byte[] _textEncoding = new byte[4];
-        private readonly byte[] _uniqueId = new byte[4];
-        private readonly byte[] _fileVersion = new byte[4];
-        private readonly byte[] _orthographicIndex = new byte[4];
-        private readonly byte[] _inflectionIndex = new byte[4];
-        private readonly byte[] _indexNames = new byte[4];
-        private readonly byte[] _indexKeys = new byte[4];
+        private readonly byte[] _exthFlags = new byte[4];
         private readonly byte[] _extraIndex0 = new byte[4];
         private readonly byte[] _extraIndex1 = new byte[4];
         private readonly byte[] _extraIndex2 = new byte[4];
         private readonly byte[] _extraIndex3 = new byte[4];
         private readonly byte[] _extraIndex4 = new byte[4];
         private readonly byte[] _extraIndex5 = new byte[4];
-        private readonly byte[] _firstNonBookIndex = new byte[4];
-        private readonly byte[] _fullNameOffset = new byte[4];
-        private readonly byte[] _fullNameLength = new byte[4];
-        private readonly byte[] _locale = new byte[4];
-        private readonly byte[] _inputLanguage = new byte[4];
-        private readonly byte[] _outputLanguage = new byte[4];
-        private readonly byte[] _minVersion = new byte[4];
+        private readonly byte[] _fileVersion = new byte[4];
         private readonly byte[] _firstImageIndex = new byte[4];
-        private readonly byte[] _huffmanRecordOffset = new byte[4];
+        private readonly byte[] _firstNonBookIndex = new byte[4];
+        private readonly byte[] _fullNameLength = new byte[4];
+        private readonly byte[] _fullNameOffset = new byte[4];
+        private readonly byte[] _headerLength = new byte[4];
         private readonly byte[] _huffmanRecordCount = new byte[4];
-        private readonly byte[] _huffmanTableOffset = new byte[4];
+        private readonly byte[] _huffmanRecordOffset = new byte[4];
         private readonly byte[] _huffmanTableLength = new byte[4];
-        private readonly byte[] _exthFlags = new byte[4];
-        private readonly ExthHead _exthHeader;
+        private readonly byte[] _huffmanTableOffset = new byte[4];
+        private readonly byte[] _identifier = new byte[4];
+        private readonly byte[] _indexKeys = new byte[4];
+        private readonly byte[] _indexNames = new byte[4];
+        private readonly byte[] _inflectionIndex = new byte[4];
+        private readonly byte[] _inputLanguage = new byte[4];
+        private readonly byte[] _locale = new byte[4];
+        private readonly byte[] _minVersion = new byte[4];
+        private readonly byte[] _mobiType = new byte[4];
+        private readonly byte[] _orthographicIndex = new byte[4];
+        private readonly byte[] _outputLanguage = new byte[4];
 
         private readonly byte[] _remainder;
+        private readonly byte[] _textEncoding = new byte[4];
+        private readonly byte[] _uniqueId = new byte[4];
 
         public MobiHead()
         {
@@ -74,7 +73,7 @@ namespace Bookie.Format.Mobi.Metadata
             fs.Read(_fullNameOffset, 0, _fullNameOffset.Length);
             fs.Read(_fullNameLength, 0, _fullNameLength.Length);
 
-            int fullNameLen = Converter.ToInt32(_fullNameLength);
+            var fullNameLen = Converter.ToInt32(_fullNameLength);
             fs.Read(_locale, 0, _locale.Length);
             fs.Read(_inputLanguage, 0, _inputLanguage.Length);
             fs.Read(_outputLanguage, 0, _outputLanguage.Length);
@@ -87,20 +86,20 @@ namespace Bookie.Format.Mobi.Metadata
             fs.Read(_exthFlags, 0, _exthFlags.Length);
 
             //If bit 6 (0x40) is set, then there's an EXTH record
-            bool exthExists = (Converter.ToUInt32(_exthFlags) & 0x40) != 0;
+            var exthExists = (Converter.ToUInt32(_exthFlags) & 0x40) != 0;
 
             fs.Read(restOfMobiHeader, 0, restOfMobiHeader.Length);
 
             if (exthExists)
             {
-                _exthHeader = new ExthHead(fs);
+                ExthHeader = new ExthHead(fs);
             }
 
-            int currentOffset = 132 + restOfMobiHeader.Length + ExthHeaderSize;
+            var currentOffset = 132 + restOfMobiHeader.Length + ExthHeaderSize;
             _remainder = new byte[(int)(mobiHeaderSize - currentOffset)];
             fs.Read(_remainder, 0, _remainder.Length);
 
-            int fullNameIndexInRemainder = Converter.ToInt32(_fullNameOffset) - currentOffset;
+            var fullNameIndexInRemainder = Converter.ToInt32(_fullNameOffset) - currentOffset;
 
             var fullName = new byte[fullNameLen];
 
@@ -113,10 +112,10 @@ namespace Bookie.Format.Mobi.Metadata
                         if (fullNameLen > 0)
                         {
                             Array.Copy(_remainder,
-                            fullNameIndexInRemainder,
-                            fullName,
-                            0,
-                            fullNameLen);
+                                fullNameIndexInRemainder,
+                                fullName,
+                                0,
+                                fullNameLen);
                         }
                     }
                 }
@@ -130,20 +129,17 @@ namespace Bookie.Format.Mobi.Metadata
         {
             get
             {
-                if (_exthHeader == null)
+                if (ExthHeader == null)
                 {
                     return 0;
                 }
-                else
-                {
-                    return _exthHeader.Size;
-                }
+                return ExthHeader.Size;
             }
         }
 
-        public string FullName => Encoding.ASCII.GetString(_remainder).Replace("\0", String.Empty);
+        public string FullName => Encoding.ASCII.GetString(_remainder).Replace("\0", string.Empty);
 
-        public string IdentifierAsString => Encoding.UTF8.GetString(_identifier).Replace("\0", String.Empty);
+        public string IdentifierAsString => Encoding.UTF8.GetString(_identifier).Replace("\0", string.Empty);
 
         public uint HeaderLength => Converter.ToUInt32(_headerLength);
 
@@ -155,18 +151,42 @@ namespace Bookie.Format.Mobi.Metadata
             {
                 switch (MobiType)
                 {
-                    case 2: return "Mobipocket Book";
-                    case 3: return "PalmDoc Book";
-                    case 4: return "Audio";
-                    case 257: return "News";
-                    case 258: return "News Feed";
-                    case 259: return "News Magazine";
-                    case 513: return "PICS";
-                    case 514: return "WORD";
-                    case 515: return "XLS";
-                    case 516: return "PPT";
-                    case 517: return "TEXT";
-                    case 518: return "HTML";
+                    case 2:
+                        return "Mobipocket Book";
+
+                    case 3:
+                        return "PalmDoc Book";
+
+                    case 4:
+                        return "Audio";
+
+                    case 257:
+                        return "News";
+
+                    case 258:
+                        return "News Feed";
+
+                    case 259:
+                        return "News Magazine";
+
+                    case 513:
+                        return "PICS";
+
+                    case 514:
+                        return "WORD";
+
+                    case 515:
+                        return "XLS";
+
+                    case 516:
+                        return "PPT";
+
+                    case 517:
+                        return "TEXT";
+
+                    case 518:
+                        return "HTML";
+
                     default:
                         return $"Unknown {MobiType}";
                 }
@@ -181,8 +201,12 @@ namespace Bookie.Format.Mobi.Metadata
             {
                 switch (TextEncoding)
                 {
-                    case 1252: return "Cp1252";
-                    case 65001: return "UTF-8";
+                    case 1252:
+                        return "Cp1252";
+
+                    case 65001:
+                        return "UTF-8";
+
                     default:
                         return null;
                 }
@@ -229,6 +253,6 @@ namespace Bookie.Format.Mobi.Metadata
 
         public uint HuffmanTableLength => Converter.ToUInt32(_huffmanTableLength);
 
-        public ExthHead ExthHeader => _exthHeader;
+        public ExthHead ExthHeader { get; }
     }
 }

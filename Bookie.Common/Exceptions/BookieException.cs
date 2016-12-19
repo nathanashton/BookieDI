@@ -16,7 +16,7 @@ namespace Bookie.Common.Exceptions
         }
 
         public BookieException(Exception innerException, string message = "")
-    : base(message, innerException)
+            : base(message, innerException)
         {
         }
 

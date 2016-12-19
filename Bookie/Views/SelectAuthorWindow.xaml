@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bookie.Views"
-        mc:Ignorable="d"
-        Title="SelectAuthorWindow" Height="300" Width="300" Topmost="True">
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen"
+        Title="Authors" Height="300" Width="300" Topmost="True">
     <DockPanel>
-        <TextBox TextChanged="TextBox_TextChanged" Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Margin="5" DockPanel.Dock="Top"/>
-        <Button Margin="5" DockPanel.Dock="Bottom" Content="Choose" Command="{Binding ChooseAuthorCommand}" Click="Button_Click"/>
-        <ListBox Margin="5" SelectedItem="{Binding SelectedAuthor, Mode=TwoWay}" ItemsSource="{Binding FilteredAuthors}" />
+        <syncfusion:AutoComplete DockPanel.Dock="Top" Source="Custom" CustomSource="{Binding Authors}" DisplayMemberPath="FullName"/>
+        <TextBox TextChanged="TextBox_TextChanged" Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="5,10,5,5" DockPanel.Dock="Top" Name="FilterBox" />
+        <Button Margin="5" DockPanel.Dock="Bottom" Content="Choose" Command="{Binding ChooseAuthorCommand}"
+                Click="Button_Click" IsDefault="True" />
+        <ListBox Margin="5" SelectedItem="{Binding SelectedAuthor, Mode=TwoWay}"
+                 ItemsSource="{Binding FilteredAuthors}" />
     </DockPanel>
 </Window>

@@ -1,5 +1,7 @@
-﻿using Bookie.Common.Entities;
+﻿using System;
+using Bookie.Common.Entities;
 using System.Collections.ObjectModel;
+using Bookie.Common.EventArgs;
 
 namespace Bookie.Core.Interfaces
 {
@@ -8,5 +10,8 @@ namespace Bookie.Core.Interfaces
         ObservableCollection<Author> GetAllAuthors();
 
         int Persist(Author author);
+
+        event EventHandler<AuthorEventArgs> AuthorChanged;
+
     }
 }

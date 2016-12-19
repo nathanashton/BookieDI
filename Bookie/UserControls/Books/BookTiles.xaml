@@ -50,7 +50,7 @@
                                 <TextBlock Foreground="Black" Height="70" Padding="0" FontSize="12"
                                            FontFamily="Calibri" FontWeight="SemiBold"
                                            TextAlignment="Center" TextWrapping="Wrap"
-                                           Text="{Binding Path=Authors.Count}" />
+                                           Text="{Binding Path=Title}" />
                             </Label>
                         </StackPanel>
                     </StackPanel>
